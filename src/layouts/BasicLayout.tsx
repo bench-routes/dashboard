@@ -5,7 +5,6 @@ import { Grid, GridItem } from "@chakra-ui/react";
 // component imports.
 import SiderMenu from "../components/SiderMenu";
 import PageHeader from "../components/PageHeader";
-
 interface PageProps {
   children: React.ReactNode;
 }

@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Box, HStack, Text, Icon } from "@chakra-ui/react";
+import { Box, HStack, Text, Icon, Tooltip } from "@chakra-ui/react";
 import { FaDesktop } from "react-icons/fa";
 
 import { ColorModeSwitcher } from "../../utils/ColorModeSwitcher";
@@ -17,13 +17,17 @@ const PageHeader: React.FC<PageProps> = (props: PageProps) => {
           Bench Routes
         </Text>
         <HStack>
-          <Icon
-            cursor="pointer"
-            as={FaDesktop}
-            h={5}
-            w={5}
-            onClick={toggleSidebar}
-          />
+          <Tooltip label="Toggle Full Screen">
+            <div>
+              <Icon
+                cursor="pointer"
+                as={FaDesktop}
+                h={5}
+                w={5}
+                onClick={toggleSidebar}
+              />
+            </div>
+          </Tooltip>
           <ColorModeSwitcher />
         </HStack>
       </Box>
