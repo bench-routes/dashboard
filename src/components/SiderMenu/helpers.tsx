@@ -33,7 +33,7 @@ export const renderExpandedAccordion = (
       <Accordion key={path} allowToggle>
         <AccordionItem>
           <AccordionButton pl={0}>
-            <Text key={path} fontWeight="bold" fontSize="md">
+            <Text key={path} fontWeight="bold" fontSize="md" color="#fff">
               {name}
             </Text>
           </AccordionButton>
@@ -49,7 +49,9 @@ export const renderExpandedAccordion = (
     return (
       <Link key={path} to={path}>
         <Text
-          {...(path === currPath && { color: "tomato" })}
+          {...(path === currPath
+            ? { color: "brand.active" }
+            : { color: "#fff" })}
           key={path}
           fontWeight="bold"
           fontSize="sm"
@@ -72,7 +74,7 @@ export const renderCollapsedAccordion = (
         <AccordionItem>
           <Tooltip placement="right" key={path} label={name}>
             <AccordionButton>
-              <Icon as={getIcon(name)} w={6} h={6} />
+              <Icon as={getIcon(name)} w={6} h={6} color="#fff" />
             </AccordionButton>
           </Tooltip>
           <AccordionPanel pb={4}>
@@ -88,7 +90,9 @@ export const renderCollapsedAccordion = (
       <Tooltip placement="right" key={path} label={name}>
         <Link to={path}>
           <Icon
-            {...(path === currPath && { color: "tomato" })}
+            {...(path === currPath
+              ? { color: "brand.active" }
+              : { color: "#fff" })}
             as={getIcon(name)}
             w={5}
             h={5}

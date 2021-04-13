@@ -27,6 +27,7 @@ const SiderMenu: React.FC = () => {
             h={6}
             onClick={handleToggle}
             mb={10}
+            color="#fff"
           />
         </VStack>
         <VStack spacing={6} mx={2} textAlign="center">
@@ -40,7 +41,9 @@ const SiderMenu: React.FC = () => {
                       as={getIcon(name)}
                       w={6}
                       h={6}
-                      {...(path === pathname && { color: "tomato" })}
+                      {...(path === pathname
+                        ? { color: "brand.active" }
+                        : { color: "#fff" })}
                     />
                   </Link>
                 </Tooltip>
@@ -62,6 +65,7 @@ const SiderMenu: React.FC = () => {
         h={6}
         mb={10}
         onClick={handleToggle}
+        color="#fff"
       />
       <VStack spacing={6} mx={8} align="start">
         {menu.map((menuItem) => {
@@ -70,7 +74,9 @@ const SiderMenu: React.FC = () => {
             return (
               <Link key={path} to={path}>
                 <Text
-                  {...(path === pathname && { color: "tomato" })}
+                  {...(path === pathname
+                    ? { color: "brand.active" }
+                    : { color: "#fff" })}
                   key={menuItem.path}
                   fontWeight="bold"
                   fontSize="md"

@@ -23,7 +23,7 @@ const BasicLayout: React.FC<PageProps> = (props: PageProps) => {
         templateColumns="repeat(24, 1fr)"
       >
         {sidebarOpen && (
-          <GridItem rowSpan={24} colSpan={1} borderRight="1px solid #d1d1d1">
+          <GridItem rowSpan={24} colSpan={1} bg="brand.primary">
             <SiderMenu />
           </GridItem>
         )}
@@ -34,6 +34,7 @@ const BasicLayout: React.FC<PageProps> = (props: PageProps) => {
           rowSpan={22}
           colSpan={sidebarOpen ? 23 : 24}
           borderTop="1px solid #d1d1d1"
+          padding={4}
         >
           {props.children}
         </GridItem>
