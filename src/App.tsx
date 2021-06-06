@@ -9,9 +9,10 @@ import {
 } from "react-router-dom";
 
 import Home from "./pages/Home";
+import theme from "./theme";
 
 export const App: React.FC = () => (
-  <ChakraProvider>
+  <ChakraProvider theme={theme}>
     <Router>
       <BasicLayout>
         <Switch>
