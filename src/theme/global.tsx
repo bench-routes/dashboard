@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { mode } from "@chakra-ui/theme-tools";
 
 const styles = {
