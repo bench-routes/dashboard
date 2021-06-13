@@ -12,6 +12,10 @@ export interface FetchState<T> {
 
 type ObjectLiteral = { [key: string]: any };
 
+/*  Reusable fetch service for making requests to api endpoints 
+    input - url
+    output - response,error,isLoaded
+*/
 export const useFetch = <T extends ObjectLiteral>(
   url: string
 ): FetchState<T> => {
