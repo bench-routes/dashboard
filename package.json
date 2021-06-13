@@ -56,7 +56,7 @@
       "yarn format",
       "git add"
     ],
-    "**/*.{ts,tsx}": "npm run lint"
+    "**/*.{ts,tsx}": "yarn run lint"
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.1.7",
