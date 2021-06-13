@@ -47,7 +47,7 @@ const MachineSelector: React.SFC = () => {
           : null}
       </Select>
       {error !== undefined ? (
-        <Alert fontSize="xs" status="error">
+        <Alert data-testid="error-message" fontSize="xs" status="error">
           <AlertIcon />
           Error in fetching machines
         </Alert>

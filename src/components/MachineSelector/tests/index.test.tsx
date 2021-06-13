@@ -1,6 +1,6 @@
 import * as React from "react";
 import axios from "axios";
-import { screen, waitFor, fireEvent } from "@testing-library/react";
+import { waitFor, fireEvent } from "@testing-library/react";
 import MachineSelector from "..";
 import { render } from "../../../utils/customRender";
 import { getActiveMachines } from "../../../services/getActiveMachines";
@@ -13,6 +13,10 @@ const fakeMachines = {
 };
 
 describe("MachineSelector Component", () => {
+  beforeEach(() => {
+    mockedAxios.get.mockReset();
+  });
+
   test("initially renders with localhost ", async () => {
     mockedAxios.get.mockResolvedValue({ data: fakeMachines });
 
@@ -22,7 +26,8 @@ describe("MachineSelector Component", () => {
     expect(selectElement).toHaveValue("localhost");
     expect(mockedAxios.get).toHaveBeenCalledWith(getActiveMachines());
   });
-  test("change value on selecting different option ", async () => {
+
+  test("changes value on selecting different option ", async () => {
     mockedAxios.get.mockResolvedValue({ data: fakeMachines });
 
     const { getByTestId } = render(<MachineSelector />);
@@ -30,7 +35,20 @@ describe("MachineSelector Component", () => {
     fireEvent.change(getByTestId("machine-selector"), {
       target: { value: "google" },
     });
+
     expect(selectElement).toHaveValue("google");
     expect(mockedAxios.get).toHaveBeenCalledWith(getActiveMachines());
+  });
+
+  test("is disabled and display message on error", async () => {
+    mockedAxios.get.mockRejectedValue(new Error("Async error"));
+
+    const { getByTestId } = render(<MachineSelector />);
+    const selectElement = await waitFor(() => getByTestId("machine-selector"));
+
+    expect(selectElement).toBeDisabled();
+    expect(getByTestId("error-message")).toHaveTextContent(
+      "Error in fetching machines"
+    );
   });
 });
