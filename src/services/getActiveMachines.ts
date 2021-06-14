@@ -1,5 +1,5 @@
-import { getBackendBaseUrl } from "./getBackendBaseUrl";
+import constants from "../utils/constants";
 
 export function getActiveMachines(): string {
-  return `${getBackendBaseUrl()}/active-machines`;
+  return `${constants.backendBaseUrl}/active-machines`;
 }

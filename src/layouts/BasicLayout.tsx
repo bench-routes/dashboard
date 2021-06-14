@@ -1,6 +1,6 @@
 // default imports.
 import React, { Fragment } from "react";
-import { SelectedMachine } from "../store/machineContainer";
+import { GlobalStore } from "../store/global";
 
 interface PageProps {
   children: React.ReactNode;
@@ -9,7 +9,7 @@ interface PageProps {
 const BasicLayout: React.FC<PageProps> = (props: PageProps) => {
   return (
     <Fragment>
-      <SelectedMachine.Provider>{props.children}</SelectedMachine.Provider>
+      <GlobalStore.Provider>{props.children}</GlobalStore.Provider>
     </Fragment>
   );
 };
