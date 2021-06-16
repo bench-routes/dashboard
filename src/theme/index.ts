@@ -1,3 +1,5 @@
+import { Button } from "./components/Button";
+import { DateTime } from "./components/DateTime";
 import { Select } from "./components/Select";
 import { Heading } from "./components/Heading";
 import { extendTheme } from "@chakra-ui/react";
@@ -12,6 +14,8 @@ const overrides = {
   components: {
     Heading,
     Select,
+    DateTime,
+    Button,
   },
 };
 export default extendTheme(overrides);

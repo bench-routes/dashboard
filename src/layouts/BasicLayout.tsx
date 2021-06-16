@@ -1,5 +1,6 @@
 // default imports.
 import React, { Fragment } from "react";
+import "react-datetime/css/react-datetime.css";
 import { GlobalStore } from "../store/global";
 
 interface PageProps {

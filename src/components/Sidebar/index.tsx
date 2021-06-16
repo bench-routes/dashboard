@@ -3,6 +3,7 @@ import React from "react";
 import logo from "../../assets/logo.png";
 import { VStack, Image, HStack, Heading, StackDivider } from "@chakra-ui/react";
 import MachineSelector from "../MachineSelector";
+import TimeQuerier from "../TimeQuerier";
 
 const Sidebar: React.FC = () => {
   return (
@@ -20,6 +21,9 @@ const Sidebar: React.FC = () => {
       </HStack>
       <HStack w="100%" mb={1}>
         <MachineSelector />
+      </HStack>
+      <HStack w="100%" mb={1}>
+        <TimeQuerier />
       </HStack>
     </VStack>
   );
