@@ -1,3 +1,4 @@
+import { NumberInput } from "./components/NumberInput";
 import { Button } from "./components/Button";
 import { DateTime } from "./components/DateTime";
 import { Select } from "./components/Select";
@@ -16,6 +17,7 @@ const overrides = {
     Select,
     DateTime,
     Button,
+    NumberInput,
   },
 };
 export default extendTheme(overrides);

@@ -32,6 +32,7 @@ const TimeQuerier: React.SFC = () => {
   const [error, setError] = useState<undefined | string>(undefined);
 
   const handleStartChange = (date: moment.Moment | string) => {
+    console.log(date);
     if (typeof date !== "string") {
       setStartTime(date);
       setError(undefined);
@@ -74,7 +75,7 @@ const TimeQuerier: React.SFC = () => {
         <Box sx={styles}>
           <Datetime
             value={startTime}
-            inputProps={{ className: "class" }}
+            inputProps={{ className: "custom-datepicker" }}
             onChange={handleStartChange}
             isValidDate={valid}
           />
@@ -85,21 +86,22 @@ const TimeQuerier: React.SFC = () => {
         <Box sx={styles}>
           <Datetime
             value={endTime}
-            inputProps={{ className: "class" }}
+            inputProps={{ className: "custom-datepicker" }}
             onChange={handleEndChange}
             isValidDate={valid}
+            data-testid="end-time"
           />
         </Box>
       </HStack>
       <HStack pb="1" w="100%" justifyContent="space-between">
-        <Text>Step Time</Text>
+        <Text>Step Time (s)</Text>
         <NumberInput
-          fontFamily="Monaco"
           w="60%"
           size="sm"
           value={stepTime}
           onChange={handleStepChange}
           min={minStepValue}
+          data-testid="step-value"
         >
           <NumberInputField />
           <NumberInputStepper>
@@ -109,7 +111,13 @@ const TimeQuerier: React.SFC = () => {
         </NumberInput>
       </HStack>
       <HStack pt="2" pb="1" w="100%">
-        <Button onClick={handleFetch} variant="fetch" w="60%" size="md">
+        <Button
+          onClick={handleFetch}
+          data-testid="fetch-button"
+          variant="fetch"
+          w="60%"
+          size="md"
+        >
           FETCH
         </Button>
       </HStack>
