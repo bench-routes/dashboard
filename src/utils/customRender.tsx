@@ -3,6 +3,7 @@ import { render, RenderOptions } from "@testing-library/react";
 import { ChakraProvider } from "@chakra-ui/react";
 import { GlobalStore } from "../store/global";
 import theme from "../theme";
+import { TimeQuerierStore } from "../store/timeQuerier";
 
 /*  Function used to render the component that we need to test
     after wrapping it around all the providers like ChakraProvider,
@@ -12,7 +13,14 @@ import theme from "../theme";
 */
 const AllProviders = ({ children }: { children?: React.ReactNode }) => (
   <ChakraProvider theme={theme}>
+<<<<<<< HEAD
     <GlobalStore.Provider>{children}</GlobalStore.Provider>
+=======
+    {" "}
+    <GlobalStore.Provider>
+      <TimeQuerierStore.Provider>{children}</TimeQuerierStore.Provider>
+    </GlobalStore.Provider>
+>>>>>>> Make TimeQuerier functional
   </ChakraProvider>
 );
 
