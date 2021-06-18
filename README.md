@@ -1,59 +1,65 @@
-This project was bootstrapped with
-[Create React App](https://github.com/facebook/create-react-app).
+# Bench Routes Dashboard
 
-## Available Scripts
+Bench routes dashboard is a user interface to access, visualize and introspect data curated by [bench-routes](https://github.com/bench-routes/bench-routes.git). This files explains how to setup and work with Bench Routes Dashboard.
 
-In the project directory, you can run:
+## Introduction
 
-### `yarn start`
+Bench Routes Dashboard was bootstrapped using [Create React App](https://github.com/facebook/create-react-app), a popular toolkit for generating React application setups. You can find general information about Create React App on [their documentation site](https://create-react-app.dev/).
 
-Runs the app in the development mode.<br /> Open
-[http://localhost:3000](http://localhost:3000) to view it in the browser.
+Instead of plain JavaScript, we use [TypeScript](https://www.typescriptlang.org/) to ensure typed code.
 
-The page will reload if you make edits.<br /> You will also see any lint errors
-in the console.
+## Development environment
 
-### `yarn test`
+To work with the React UI code, you will need to have the following tools installed:
 
-Launches the test runner in the interactive watch mode.<br /> See the section
-about
-[running tests](https://facebook.github.io/create-react-app/docs/running-tests)
-for more information.
+- The [Node.js](https://nodejs.org/) JavaScript runtime.
+- The [Yarn](https://yarnpkg.com/) package manager.
+- _Recommended:_ An editor with TypeScript, React, and [ESLint](https://eslint.org/) linting support. See e.g. [Create React App's editor setup instructions](https://create-react-app.dev/docs/setting-up-your-editor/).Please ensure that [the editor uses the project's TypeScript version rather than its own](https://code.visualstudio.com/docs/typescript/typescript-compiling#_using-the-workspace-version-of-typescript).
 
-### `yarn build`
+## Cloning the repository
 
-Builds the app for production to the `build` folder.<br /> It correctly bundles
-React in production mode and optimizes the build for the best performance.
+You can clone this repository by running:
 
-The build is minified and the filenames include the hashes.<br /> Your app is
-ready to be deployed!
+```
+git clone https://github.com/bench-routes/dashboard.git
+```
 
-See the section about
-[deployment](https://facebook.github.io/create-react-app/docs/deployment) for
-more information.
+## Installing npm dependencies
 
-### `yarn eject`
+To get started with the project, you will need to install some dependencies via the yarn package manager as follows:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+    yarn
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can
-`eject` at any time. This command will remove the single build dependency from
-your project.
+Yarn consults the `package.json` and `yarn.lock` files for dependencies to install. It creates a `node_modules` directory with all installed dependencies.
 
-Instead, it will copy all the configuration files and the transitive
-dependencies (webpack, Babel, ESLint, etc) right into your project so you have
-full control over them. All of the commands except `eject` will still work, but
-they will point to the copied scripts so you can tweak them. At this point
-you’re on your own.
+**NOTE**: Remember to change directory to `dashboard` before running this command and the following commands.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for
-small and middle deployments, and you shouldn’t feel obligated to use this
-feature. However we understand that this tool wouldn’t be useful if you couldn’t
-customize it when you are ready for it.
+## Running a local development server
 
-## Learn More
+You can start a development server for the Dashboard by running:
 
-You can learn more in the
-[Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+    yarn start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This will open a browser window with the React app running on http://localhost:3000/ in "watch" mode i.e. the web server will reload if you make edits to the source code and you will also see any linting errors in the console.
+
+## Running tests
+
+Create React App uses the [Jest](https://jestjs.io/) framework for running tests. To run tests in interactive watch mode:
+
+```
+    yarn test
+```
+
+## Linting
+
+We define linting rules for the [ESLint](https://eslint.org/) linter. We recommend integrating automated linting and fixing into your editor (e.g. upon save), but you can also run the linter separately from the command-line.
+
+To detect and automatically fix lint errors, run:
+
+```
+    yarn lint
+```
