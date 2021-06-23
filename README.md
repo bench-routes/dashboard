@@ -24,6 +24,10 @@ You can clone this repository by running:
 git clone https://github.com/bench-routes/dashboard.git
 ```
 
+## Setting up Mock API
+
+Currently some changes need to be done in the existing backend endpoints, meanwhile we are using [Mockoon](https://mockoon.com/) for mock API.Make sure to setup mockoon server on your local machine before using the dashboard. You can do this by simply importing the given [JSON file](https://api.jsonbin.io/b/60d379288a4cd025b7a4202f).You can find the instructions of importing [here](https://mockoon.com/docs/latest/import-export-data/).
+
 ## Installing npm dependencies
 
 To get started with the project, you will need to install some dependencies via the yarn package manager as follows:
