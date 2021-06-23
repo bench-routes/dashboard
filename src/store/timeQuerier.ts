@@ -1,31 +1,45 @@
 import { useState } from "react";
 import { createContainer } from "unstated-next";
-import {
-  defaultStartTimestamp,
-  defaultEndTimestamp,
-  defaultStepValue,
-} from "./../utils/constants";
+import constants from "./../utils/constants";
 
-const useTimeQuerier = () => {
-  const [selectedStartTimestamp, setStartTimestamp] = useState(
-    defaultStartTimestamp
-  );
-  const [selectedEndTimestamp, setEndTimeStamp] = useState(defaultEndTimestamp);
-  const [selectedStepValue, setStepValue] = useState(defaultStepValue);
+interface TimeQuerierStateInterface {
+  selectedStartTimestamp: string;
+  selectedEndTimestamp: string;
+  selectedStepValue: number;
+}
+interface TimeQuerierHookInterface {
+  timeQuerierState: TimeQuerierStateInterface;
+  changeTimeQuerier: (
+    selectedStartTimestamp: string,
+    selectedEndTimestamp: string,
+    selectedStepValue: number
+  ) => void;
+}
+
+const initTimeQuerierStore: TimeQuerierStateInterface = {
+  selectedStartTimestamp: constants.defaultStartTimestamp,
+  selectedEndTimestamp: constants.defaultEndTimestamp,
+  selectedStepValue: constants.defaultStepValue,
+};
+
+const useTimeQuerier = (
+  initialState = initTimeQuerierStore
+): TimeQuerierHookInterface => {
+  const [timeQuerierState, setTimeState] = useState(initialState);
   const changeTimeQuerier = (
-    startTimestamp: string,
-    endTimestamp: string,
-    stepValue: number
+    selectedStartTimestamp: string,
+    selectedEndTimestamp: string,
+    selectedStepValue: number
   ) => {
-    setStartTimestamp(startTimestamp);
-    setEndTimeStamp(endTimestamp);
-    setStepValue(stepValue);
+    setTimeState({
+      selectedStartTimestamp,
+      selectedEndTimestamp,
+      selectedStepValue,
+    });
   };
 
   return {
-    selectedStartTimestamp,
-    selectedEndTimestamp,
-    selectedStepValue,
+    timeQuerierState,
     changeTimeQuerier,
   };
 };

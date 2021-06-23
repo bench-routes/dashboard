@@ -1,14 +1,12 @@
-<<<<<<< HEAD
+import moment from "moment";
+
 export default {
   defaultSelectedMachine: "localhost",
   backendBaseUrl: "http://localhost:3002",
+  defaultStepValue: 15,
+  minStepValue: 1,
+  defaultStartTimestamp: moment().subtract(1, "h").toISOString(),
+  defaultEndTimestamp: moment().toISOString(),
+  dateFormat: "DD/MM/yyyy",
+  timeFormat: "h:mm A",
 };
-=======
-import moment from "moment";
-
-export const defaultSelectedMachine = "localhost";
-export const defaultStepValue = 15;
-export const minStepValue = 1;
-export const defaultStartTimestamp = moment().subtract(1, "h").toISOString();
-export const defaultEndTimestamp = moment().toISOString();
->>>>>>> Make TimeQuerier functional

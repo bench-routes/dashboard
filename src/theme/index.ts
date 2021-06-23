@@ -6,6 +6,7 @@ import { Heading } from "./components/Heading";
 import { extendTheme } from "@chakra-ui/react";
 // Global style overrides
 import styles from "./global";
+import "react-datetime/css/react-datetime.css";
 //Branding style ovverides
 import branding from "./branding";
 

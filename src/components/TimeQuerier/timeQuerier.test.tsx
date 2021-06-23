@@ -1,14 +1,18 @@
 import * as React from "react";
 import moment from "moment";
 import { fireEvent } from "@testing-library/react";
-import TimeQuerier from "..";
-import { render } from "../../../utils/customRender";
-import {
+import TimeQuerier from "./";
+import { render } from "../../utils/customRender";
+import constants from "../../utils/constants";
+import { TimeQuerierStore } from "../../store/timeQuerier";
+
+const {
   defaultStartTimestamp,
   defaultStepValue,
   defaultEndTimestamp,
-} from "../../../utils/constants";
-import { TimeQuerierStore } from "../../../store/timeQuerier";
+  dateFormat,
+  timeFormat,
+} = constants;
 
 describe("TimeQuerier Component", () => {
   test("initially renders with correct values", () => {
@@ -17,11 +21,13 @@ describe("TimeQuerier Component", () => {
     expect(getByDisplayValue(defaultStepValue.toString(10))).toBeTruthy();
     expect(
       getByDisplayValue(
-        moment(defaultStartTimestamp).format("MM/DD/YYYY h:m A")
+        moment(defaultStartTimestamp).format(`${dateFormat} ${timeFormat}`)
       )
     ).toBeTruthy();
     expect(
-      getByDisplayValue(moment(defaultEndTimestamp).format("MM/DD/YYYY h:m A"))
+      getByDisplayValue(
+        moment(defaultEndTimestamp).format(`${dateFormat} ${timeFormat}`)
+      )
     ).toBeTruthy();
   });
 
@@ -51,8 +57,8 @@ describe("TimeQuerier Component", () => {
 
   test("fetch works", () => {
     const TestComponent = () => {
-      const timeQuerierStore = TimeQuerierStore.useContainer();
-      return <div data-testid="test">{timeQuerierStore.selectedStepValue}</div>;
+      const { timeQuerierState } = TimeQuerierStore.useContainer();
+      return <div data-testid="test">{timeQuerierState.selectedStepValue}</div>;
     };
     const { getByTestId, getByDisplayValue } = render(
       <>
@@ -69,26 +75,4 @@ describe("TimeQuerier Component", () => {
     fireEvent.click(getByTestId("fetch-button"));
     expect(getByTestId("test")).toHaveTextContent("20");
   });
-
-  // test("start-time value changes", () => {
-  //   const { getByDisplayValue } = render(<TimeQuerier />);
-
-  //   fireEvent.change(
-  //     getByDisplayValue(
-  //       moment(defaultStartTimestamp).format("MM/DD/YYYY h:m A")
-  //     ),
-  //     {
-  //       target: {
-  //         value: moment(defaultStartTimestamp).subtract(3, "h"),
-  //       },
-  //     }
-  //   );
-  //   expect(
-  //     getByDisplayValue(
-  //       moment(defaultStartTimestamp)
-  //         .subtract(3, "h")
-  //         .format("MM/DD/YYYY h:m A")
-  //     )
-  //   ).toBeTruthy();
-  // });
 });

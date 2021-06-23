@@ -13,14 +13,9 @@ import { TimeQuerierStore } from "../store/timeQuerier";
 */
 const AllProviders = ({ children }: { children?: React.ReactNode }) => (
   <ChakraProvider theme={theme}>
-<<<<<<< HEAD
-    <GlobalStore.Provider>{children}</GlobalStore.Provider>
-=======
-    {" "}
     <GlobalStore.Provider>
       <TimeQuerierStore.Provider>{children}</TimeQuerierStore.Provider>
     </GlobalStore.Provider>
->>>>>>> Make TimeQuerier functional
   </ChakraProvider>
 );
 
