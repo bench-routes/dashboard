@@ -12,7 +12,6 @@ import theme from "../theme";
 */
 const AllProviders = ({ children }: { children?: React.ReactNode }) => (
   <ChakraProvider theme={theme}>
-    {" "}
     <GlobalStore.Provider>{children}</GlobalStore.Provider>
   </ChakraProvider>
 );

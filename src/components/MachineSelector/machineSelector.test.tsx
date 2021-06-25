@@ -1,17 +1,24 @@
 import * as React from "react";
 import axios from "axios";
 import { waitFor, fireEvent } from "@testing-library/react";
-import MachineSelector from "..";
-import { render } from "../../../utils/customRender";
-import { getActiveMachines } from "../../../services/getActiveMachines";
-import { mockMachines } from "./mockData";
+import MachineSelector from ".";
+import { render } from "../../utils/customRender";
+import { getActiveMachines } from "../../services/getActiveMachines";
+import { mockMachines } from "../../mock/mockMachines";
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
-describe("MachineSelector Component", () => {
+describe("tests for the MachineSelector Component", () => {
   beforeEach(() => {
     mockedAxios.get.mockReset();
+  });
+
+  test("renders machine selector component", async () => {
+    const { getByTestId } = render(<MachineSelector />);
+    const selectElement = await waitFor(() => getByTestId("machine-selector"));
+
+    expect(selectElement).toBeTruthy();
   });
 
   test("initially renders with localhost ", async () => {
@@ -29,15 +36,16 @@ describe("MachineSelector Component", () => {
 
     const { getByTestId } = render(<MachineSelector />);
     const selectElement = await waitFor(() => getByTestId("machine-selector"));
+
     fireEvent.change(getByTestId("machine-selector"), {
-      target: { value: "google" },
+      target: { value: mockMachines.machines[1] },
     });
 
-    expect(selectElement).toHaveValue("google");
+    expect(selectElement).toHaveValue(mockMachines.machines[1]);
     expect(mockedAxios.get).toHaveBeenCalledWith(getActiveMachines());
   });
 
-  test("is disabled and display message on error", async () => {
+  test("is disabled and displays message on error", async () => {
     mockedAxios.get.mockRejectedValue(new Error("Async error"));
 
     const { getByTestId } = render(<MachineSelector />);
