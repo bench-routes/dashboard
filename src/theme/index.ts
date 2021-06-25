@@ -1,6 +1,8 @@
+import { ReactWindow } from "./components/ReactWindow";
 import { NumberInput } from "./components/NumberInput";
 import { Button } from "./components/Button";
 import { DateTime } from "./components/DateTime";
+import { Input } from "./components/Input";
 import { Select } from "./components/Select";
 import { Heading } from "./components/Heading";
 import { extendTheme } from "@chakra-ui/react";
@@ -19,6 +21,8 @@ const overrides = {
     DateTime,
     Button,
     NumberInput,
+    Input,
+    ReactWindow,
   },
 };
 export default extendTheme(overrides);

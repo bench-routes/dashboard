@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import MachineSelector from "../MachineSelector";
 import TimeQuerier from "../TimeQuerier";
+import RouteSelector from "../RouteSelector";
 
 const Sidebar: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const Sidebar: React.FC = () => {
       py={4}
       px={5}
       w="100%"
+      h="100%"
     >
       <HStack w="100%" mb={1}>
         <Image boxSize="42px" src={logo} alt="Logo" />
@@ -31,7 +33,14 @@ const Sidebar: React.FC = () => {
       </Box>
       <Box d="flex" w="100%" mb={1}>
         <TimeQuerier />
+<<<<<<< HEAD
       </Box>
+=======
+      </HStack>
+      <HStack flexGrow={1} w="100%" mb={1}>
+        <RouteSelector />
+      </HStack>
+>>>>>>> Add basic UI of RouteSelector
     </VStack>
   );
 };
