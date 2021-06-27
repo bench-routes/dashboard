@@ -1,12 +1,24 @@
 import React from "react";
 import { FixedSizeList as List } from "react-window";
-import { useStyleConfig, Box } from "@chakra-ui/react";
+import {
+  useStyleConfig,
+  Box,
+  Flex,
+  Text,
+  Tooltip,
+  Alert,
+  AlertIcon,
+} from "@chakra-ui/react";
 import AutoSizer from "react-virtualized-auto-sizer";
 
 import { service_states } from "./index";
+import { ArrowUpIcon, ArrowDownIcon } from "@chakra-ui/icons";
+import { GlobalStore } from "../../store/global";
+import { truncate } from "../../utils/stringManipulation";
 
 interface routeListProps {
   routes: service_states[];
+  error: string | undefined;
 }
 
 interface rowParameters {
@@ -14,24 +26,41 @@ interface rowParameters {
   style: React.CSSProperties | undefined;
 }
 
-const RouteList: React.FC<routeListProps> = ({ routes }: routeListProps) => {
+const RouteList: React.FC<routeListProps> = ({
+  routes,
+  error,
+}: routeListProps) => {
   const styles = useStyleConfig("ReactWindow", {});
+  const {
+    globalState: { selectedRoutePath },
+    changeRoute,
+  } = GlobalStore.useContainer();
   const Row = ({ index, style }: rowParameters) => {
-    const {
-      name,
-      path: { matrixName },
-    } = routes[index];
+    const { name, route, status } = routes[index];
+    const rowStyles = useStyleConfig("Row", {
+      variant: selectedRoutePath == route ? "active" : "",
+    });
     return (
-      <div
-        className="custom-routes"
-        onClick={() => console.log(matrixName)}
+      <Flex
+        sx={rowStyles}
+        onClick={() => changeRoute(name, route)}
         style={style}
       >
-        {name}
-      </div>
+        <Tooltip label={name} placement="bottom-start" openDelay={10}>
+          <Text flex="1"> {truncate(name, 30)}</Text>
+        </Tooltip>
+        {status ? <ArrowUpIcon boxSize={5} /> : <ArrowDownIcon boxSize={5} />}
+      </Flex>
     );
   };
 
+  if (error !== undefined)
+    return (
+      <Alert data-testid="error-message" fontSize="xs" status="error">
+        <AlertIcon />
+        {error}
+      </Alert>
+    );
   return (
     <Box sx={styles}>
       <AutoSizer>

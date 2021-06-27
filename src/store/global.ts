@@ -12,7 +12,13 @@ interface GlobalHookInterface {
 
 const initGlobalStore: GlobalStateInterface = {
   selectedMachine: constants.defaultSelectedMachine,
+<<<<<<< HEAD
 };
+=======
+  selectedRouteName: "",
+  selectedRoutePath: "",
+});
+>>>>>>> Make RouteSelector functional
 
 const useGlobalStore = (
   initialState = initGlobalStore
@@ -21,12 +27,24 @@ const useGlobalStore = (
     initialState
   );
 
-  const changeSelectedMachine = (machine: string) =>
-    setGlobalState({ ...globalState, selectedMachine: machine });
+  const changeSelectedMachine = (selectedMachine: string) =>
+    setGlobalState({
+      ...globalState,
+      selectedMachine,
+      selectedRouteName: "",
+      selectedRoutePath: "",
+    });
+  const changeRoute = (selectedRouteName: string, selectedRoutePath: string) =>
+    setGlobalState({
+      ...globalState,
+      selectedRouteName,
+      selectedRoutePath,
+    });
 
   return {
     globalState,
     changeSelectedMachine,
+    changeRoute,
   };
 };
 

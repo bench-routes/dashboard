@@ -8,14 +8,8 @@ import RouteList from "./routeList";
 
 export interface service_states {
   name: string;
-  path: {
-    fping: string;
-    jitter: string;
-    monitor: string;
-    ping: string;
-    matrixName: string;
-  };
-  status?: string;
+  route: string;
+  status: boolean;
 }
 
 const RouteSelector: React.SFC = () => {
@@ -38,9 +32,10 @@ const RouteSelector: React.SFC = () => {
     <VStack mt={4} w="100%" h="100%">
       <Search
         routes={routes}
+        isDisabled={error !== undefined || status != "fetched"}
         changeFilteredRoutes={handleFilteredRoutesChange}
       />
-      <RouteList routes={filteredRoutes} />
+      <RouteList error={error} routes={filteredRoutes} />
     </VStack>
   );
 };

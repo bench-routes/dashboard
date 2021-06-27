@@ -1,3 +1,4 @@
+import { Row } from "./components/Row";
 import { ReactWindow } from "./components/ReactWindow";
 import { NumberInput } from "./components/NumberInput";
 import { Button } from "./components/Button";
@@ -23,6 +24,7 @@ const overrides = {
     NumberInput,
     Input,
     ReactWindow,
+    Row,
   },
 };
 export default extendTheme(overrides);
