@@ -2,12 +2,24 @@ import { useState } from "react";
 import { createContainer } from "unstated-next";
 import constants from "../utils/constants";
 
-const initGlobalStore = () => ({
-  selectedMachine: constants.defaultSelectedMachine,
-});
+interface GlobalStateInterface {
+  selectedMachine: string;
+}
+interface GlobalHookInterface {
+  globalState: GlobalStateInterface;
+  changeSelectedMachine: (machine: string) => void;
+}
 
-const useGlobalStore = (initialState = initGlobalStore) => {
-  const [globalState, setGlobalState] = useState(initialState);
+const initGlobalStore: GlobalStateInterface = {
+  selectedMachine: constants.defaultSelectedMachine,
+};
+
+const useGlobalStore = (
+  initialState = initGlobalStore
+): GlobalHookInterface => {
+  const [globalState, setGlobalState] = useState<GlobalStateInterface>(
+    initialState
+  );
 
   const changeSelectedMachine = (machine: string) =>
     setGlobalState({ ...globalState, selectedMachine: machine });
