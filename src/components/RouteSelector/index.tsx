@@ -3,8 +3,8 @@ import { VStack } from "@chakra-ui/react";
 import { GlobalStore } from "../../store/global";
 import useFetch from "../../utils/useFetch";
 import { getRoutes } from "../../services/getRoutes";
-import Search from "./search";
-import RouteList from "./routeList";
+import Search from "../Search";
+import RouteList from "../RouteList";
 
 export interface service_states {
   name: string;

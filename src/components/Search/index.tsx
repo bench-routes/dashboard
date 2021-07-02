@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { InputGroup, Input, InputLeftElement } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-
-import { service_states } from "./index";
+import { GlobalStore } from "../../store/global";
+import { service_states } from "../RouteSelector";
 
 interface searchProps {
   routes: service_states[];
@@ -15,11 +15,18 @@ const Search: React.FC<searchProps> = ({
   isDisabled,
   changeFilteredRoutes,
 }: searchProps) => {
+  const [value, setValue] = useState("");
+  const { globalState } = GlobalStore.useContainer();
+
+  useEffect(() => {
+    setValue("");
+  }, [globalState.selectedMachine]);
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
     const filtered_routes = routes.filter((route) =>
       route.name.toLowerCase().includes(input.toLowerCase())
     );
+    setValue(input);
     changeFilteredRoutes(filtered_routes);
   };
   return (
@@ -29,6 +36,7 @@ const Search: React.FC<searchProps> = ({
       </InputLeftElement>
       <Input
         onChange={handleSearchChange}
+        value={value}
         isDisabled={isDisabled}
         placeholder="Enter Route Name Here"
       />

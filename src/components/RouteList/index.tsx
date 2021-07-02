@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import AutoSizer from "react-virtualized-auto-sizer";
 
-import { service_states } from "./index";
+import { service_states } from "../RouteSelector/index";
 import { ArrowUpIcon, ArrowDownIcon } from "@chakra-ui/icons";
 import { GlobalStore } from "../../store/global";
 import { truncate } from "../../utils/stringManipulation";

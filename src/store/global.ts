@@ -4,21 +4,20 @@ import constants from "../utils/constants";
 
 interface GlobalStateInterface {
   selectedMachine: string;
+  selectedRouteName: string;
+  selectedRoutePath: string;
 }
 interface GlobalHookInterface {
   globalState: GlobalStateInterface;
   changeSelectedMachine: (machine: string) => void;
+  changeRoute: (selectedRouteName: string, selectedRoutePath: string) => void;
 }
 
 const initGlobalStore: GlobalStateInterface = {
   selectedMachine: constants.defaultSelectedMachine,
-<<<<<<< HEAD
-};
-=======
   selectedRouteName: "",
   selectedRoutePath: "",
-});
->>>>>>> Make RouteSelector functional
+};
 
 const useGlobalStore = (
   initialState = initGlobalStore
