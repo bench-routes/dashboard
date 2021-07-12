@@ -8,7 +8,7 @@ interface service_states {
   machines: string[];
 }
 
-const MachineSelector: React.SFC = () => {
+const MachineSelector: React.FC = () => {
   const { globalState, changeSelectedMachine } = GlobalStore.useContainer();
   const { data, error, status } = useFetch<service_states>(getActiveMachines());
   const machines = data ? data.machines : [];

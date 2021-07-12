@@ -12,12 +12,11 @@ export interface service_states {
   status: boolean;
 }
 
-const RouteSelector: React.SFC = () => {
+const RouteSelector: React.FC = () => {
   const { globalState } = GlobalStore.useContainer();
   const { data, error, status } = useFetch<service_states[]>(
     getRoutes(globalState.selectedMachine)
   );
-
   const routes = data ? data : [];
   const [filteredRoutes, changeFilteredRoutes] = useState<service_states[]>([]);
 
@@ -29,7 +28,7 @@ const RouteSelector: React.SFC = () => {
   };
 
   return (
-    <VStack mt={4} w="100%" h="100%">
+    <VStack data-testid="route-selector" mt={4} w="100%" h="100%">
       <Search
         routes={routes}
         isDisabled={error !== undefined || status != "fetched"}

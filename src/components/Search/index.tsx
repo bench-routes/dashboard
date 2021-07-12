@@ -29,6 +29,7 @@ const Search: React.FC<searchProps> = ({
     setValue(input);
     changeFilteredRoutes(filtered_routes);
   };
+
   return (
     <InputGroup>
       <InputLeftElement pointerEvents="none">
@@ -39,6 +40,7 @@ const Search: React.FC<searchProps> = ({
         value={value}
         isDisabled={isDisabled}
         placeholder="Enter Route Name Here"
+        data-testid="route-search"
       />
     </InputGroup>
   );

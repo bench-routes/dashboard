@@ -33,14 +33,10 @@ const Sidebar: React.FC = () => {
       </Box>
       <Box d="flex" w="100%" mb={1}>
         <TimeQuerier />
-<<<<<<< HEAD
       </Box>
-=======
-      </HStack>
-      <HStack flexGrow={1} w="100%" mb={1}>
+      <Box flexGrow={1} d="flex" w="100%" mb={1}>
         <RouteSelector />
-      </HStack>
->>>>>>> Add basic UI of RouteSelector
+      </Box>
     </VStack>
   );
 };

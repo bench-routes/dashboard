@@ -1,5 +1,5 @@
 import { Dict } from "@chakra-ui/utils";
-import { mode } from "@chakra-ui/theme-tools";
+import { mode, darken, whiten } from "@chakra-ui/theme-tools";
 import { SystemStyleObject } from "@chakra-ui/react";
 
 export const Row = {
@@ -11,13 +11,19 @@ export const Row = {
     borderBottomColor: mode("gray.200", "gray.700")(props),
     boxShadow: "sm",
     cursor: "pointer",
-    ".active": {
-      bg: mode("#CAC7C7", "#454040")(props),
+    ":hover": {
+      bg: mode(
+        darken("lightSecondary", 10),
+        whiten("darkSecondary", 15)
+      )(props),
     },
   }),
   variants: {
     active: (props: Dict): SystemStyleObject => ({
       bgColor: mode("#CAC7C7", "#454040")(props),
+      ":hover": {
+        bg: mode("#CAC7C7", "#454040")(props),
+      },
     }),
   },
 };

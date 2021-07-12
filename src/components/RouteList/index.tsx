@@ -40,6 +40,7 @@ const RouteList: React.FC<routeListProps> = ({
     const rowStyles = useStyleConfig("Row", {
       variant: selectedRoutePath == route ? "active" : "",
     });
+
     return (
       <Flex
         sx={rowStyles}
@@ -62,7 +63,7 @@ const RouteList: React.FC<routeListProps> = ({
       </Alert>
     );
   return (
-    <Box sx={styles}>
+    <Box sx={styles} data-testid="route-list">
       <AutoSizer>
         {({ height, width }) => (
           <List
@@ -71,6 +72,7 @@ const RouteList: React.FC<routeListProps> = ({
             itemCount={routes.length}
             itemSize={42}
             width={width}
+            data-testid="scroll-list"
           >
             {Row}
           </List>
