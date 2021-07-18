@@ -1,8 +1,16 @@
 import React from "react";
 
 import logo from "../../assets/logo.png";
-import { VStack, Image, HStack, Heading, StackDivider } from "@chakra-ui/react";
+import {
+  VStack,
+  Image,
+  HStack,
+  Box,
+  Heading,
+  StackDivider,
+} from "@chakra-ui/react";
 import MachineSelector from "../MachineSelector";
+import TimeQuerier from "../TimeQuerier";
 
 const Sidebar: React.FC = () => {
   return (
@@ -18,9 +26,12 @@ const Sidebar: React.FC = () => {
           Bench Routes
         </Heading>
       </HStack>
-      <HStack w="100%" mb={1}>
+      <Box d="flex" w="100%" mb={1}>
         <MachineSelector />
-      </HStack>
+      </Box>
+      <Box d="flex" w="100%" mb={1}>
+        <TimeQuerier />
+      </Box>
     </VStack>
   );
 };
