@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { InputGroup, Input, InputLeftElement } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { GlobalStore } from "../../store/global";
-import { service_states } from "../RouteSelector";
+import { routeResponse } from "../RouteSelector";
 
 interface searchProps {
-  routes: service_states[];
+  routes: routeResponse[];
   isDisabled: boolean;
-  changeFilteredRoutes: (routes: service_states[]) => void;
+  changeFilteredRoutes: (routes: routeResponse[]) => void;
 }
 
 const Search: React.FC<searchProps> = ({

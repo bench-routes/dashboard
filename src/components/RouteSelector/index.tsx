@@ -6,7 +6,7 @@ import { getRoutes } from "../../services/getRoutes";
 import Search from "../Search";
 import RouteList from "../RouteList";
 
-export interface service_states {
+export interface routeResponse {
   name: string;
   route: string;
   status: boolean;
@@ -14,16 +14,16 @@ export interface service_states {
 
 const RouteSelector: React.FC = () => {
   const { globalState } = GlobalStore.useContainer();
-  const { data, error, status } = useFetch<service_states[]>(
+  const { data, error, status } = useFetch<routeResponse[]>(
     getRoutes(globalState.selectedMachine)
   );
   const routes = data ? data : [];
-  const [filteredRoutes, changeFilteredRoutes] = useState<service_states[]>([]);
+  const [filteredRoutes, changeFilteredRoutes] = useState<routeResponse[]>([]);
 
   useEffect(() => {
     handleFilteredRoutesChange(routes);
   }, [data]);
-  const handleFilteredRoutesChange = (routes: service_states[]) => {
+  const handleFilteredRoutesChange = (routes: routeResponse[]) => {
     changeFilteredRoutes([...routes]);
   };
 

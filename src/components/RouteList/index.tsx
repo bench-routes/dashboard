@@ -11,13 +11,13 @@ import {
 } from "@chakra-ui/react";
 import AutoSizer from "react-virtualized-auto-sizer";
 
-import { service_states } from "../RouteSelector/index";
+import { routeResponse } from "../RouteSelector/index";
 import { ArrowUpIcon, ArrowDownIcon } from "@chakra-ui/icons";
 import { GlobalStore } from "../../store/global";
 import { truncate } from "../../utils/stringManipulation";
 
 interface routeListProps {
-  routes: service_states[];
+  routes: routeResponse[];
   error: string | undefined;
 }
 
@@ -55,7 +55,7 @@ const RouteList: React.FC<routeListProps> = ({
     );
   };
 
-  if (error !== undefined)
+  if (error)
     return (
       <Alert data-testid="error-message" fontSize="xs" status="error">
         <AlertIcon />
