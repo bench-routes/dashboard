@@ -4,13 +4,15 @@ import useFetch from "../../utils/useFetch";
 import { getActiveMachines } from "../../services/getActiveMachines";
 import { GlobalStore } from "../../store/global";
 
-interface service_states {
+interface machineResponse {
   machines: string[];
 }
 
-const MachineSelector: React.SFC = () => {
+const MachineSelector: React.FC = () => {
   const { globalState, changeSelectedMachine } = GlobalStore.useContainer();
-  const { data, error, status } = useFetch<service_states>(getActiveMachines());
+  const { data, error, status } = useFetch<machineResponse>(
+    getActiveMachines()
+  );
   const machines = data ? data.machines : [];
 
   return (

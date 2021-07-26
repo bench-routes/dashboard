@@ -1,10 +1,12 @@
 import React from "react";
 import { Text } from "@chakra-ui/react";
-
-// export interface GraphWrapperProps {}
+import { GlobalStore } from "../../store/global";
 
 const GraphWrapper: React.FC = () => {
-  return <Text>Graph</Text>;
+  const {
+    globalState: { selectedRouteName },
+  } = GlobalStore.useContainer();
+  return <Text>{selectedRouteName}</Text>;
 };
 
 export default GraphWrapper;

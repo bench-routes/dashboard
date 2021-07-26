@@ -86,12 +86,14 @@ const useFetch = <T = unknown>(
     };
 
     fetchData();
+  }, [url]);
 
+  useEffect(() => {
     // runs when component is destroyed.
     return () => {
       cancelRequest.current = true;
     };
-  }, [url]);
+  }, []);
 
   return state;
 };
