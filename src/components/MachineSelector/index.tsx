@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Select, Alert, AlertIcon, VStack } from "@chakra-ui/react";
 import useFetch from "../../utils/useFetch";
 import { getActiveMachines } from "../../services/getActiveMachines";
@@ -15,12 +15,20 @@ const MachineSelector: React.FC = () => {
   );
   const machines = data ? data.machines : [];
 
+  useEffect(() => {
+    if (machines.length) changeSelectedMachine(machines[0]);
+  }, [data]);
+
   return (
     <VStack w="100%">
       <Select
         mt={3}
         isDisabled={status != "fetched" || error !== undefined}
-        value={globalState.selectedMachine}
+        value={
+          globalState.selectedMachine
+            ? globalState.selectedMachine
+            : "Fetching Machines"
+        }
         data-testid="machine-selector"
         onChange={(e) => {
           changeSelectedMachine(e.target.value);

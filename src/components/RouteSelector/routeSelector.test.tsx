@@ -1,10 +1,11 @@
 import * as React from "react";
 import axios from "axios";
-import { waitFor, fireEvent, prettyDOM } from "@testing-library/react";
+import { waitFor, fireEvent } from "@testing-library/react";
 import RouteSelector from "./";
 import { render } from "../../utils/customRender";
 import { mockRoutes, mockSearch } from "../../mock/mockRoutes";
 import { getRoutes } from "../../services/getRoutes";
+import { truncate } from "../../utils/stringManipulation";
 
 jest.mock("axios");
 jest.mock("react-virtualized-auto-sizer", () => ({ children }: any) =>
@@ -33,9 +34,9 @@ describe("tests for the RouteSelector Component", () => {
     const selectElement = await waitFor(() => getByTestId("route-list"));
 
     mockRoute.map((route) => {
-      expect(selectElement).toHaveTextContent(route.name);
+      expect(selectElement).toHaveTextContent(truncate(route.entity_name, 30));
     });
-    expect(mockedAxios.get).toHaveBeenCalledWith(getRoutes("localhost"));
+    expect(mockedAxios.get).toHaveBeenCalledWith(getRoutes(""));
   });
 
   test("filters routes on search ", async () => {
@@ -50,10 +51,12 @@ describe("tests for the RouteSelector Component", () => {
     });
 
     mockRoute.map((route) => {
-      if (route.name.toLowerCase().includes(mockSearch))
-        expect(selectElement).toHaveTextContent(route.name);
+      if (route.entity_name.toLowerCase().includes(mockSearch))
+        expect(selectElement).toHaveTextContent(
+          truncate(route.entity_name, 30)
+        );
     });
-    expect(mockedAxios.get).toHaveBeenCalledWith(getRoutes("localhost"));
+    expect(mockedAxios.get).toHaveBeenCalledWith(getRoutes(""));
   });
 
   test("is disabled and displays message on error", async () => {

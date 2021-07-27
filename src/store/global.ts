@@ -3,13 +3,13 @@ import { createContainer } from "unstated-next";
 import constants from "../utils/constants";
 
 interface GlobalStateInterface {
-  selectedMachine: string;
+  selectedMachine: string | null;
   selectedRouteName: string;
   selectedRoutePath: string;
 }
 interface GlobalHookInterface {
   globalState: GlobalStateInterface;
-  changeSelectedMachine: (machine: string) => void;
+  changeSelectedMachine: (machine: string | null) => void;
   changeRoute: (selectedRouteName: string, selectedRoutePath: string) => void;
 }
 
@@ -26,7 +26,7 @@ const useGlobalStore = (
     initialState
   );
 
-  const changeSelectedMachine = (selectedMachine: string) =>
+  const changeSelectedMachine = (selectedMachine: string | null) =>
     setGlobalState({
       ...globalState,
       selectedMachine,

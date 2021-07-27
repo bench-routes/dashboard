@@ -22,12 +22,13 @@ describe("tests for the MachineSelector Component", () => {
   });
 
   test("initially renders with localhost ", async () => {
-    mockedAxios.get.mockResolvedValue({ data: mockMachines });
+    const machineData = mockMachines;
+    mockedAxios.get.mockResolvedValue({ data: machineData });
 
     const { getByTestId } = render(<MachineSelector />);
     const selectElement = await waitFor(() => getByTestId("machine-selector"));
 
-    expect(selectElement).toHaveValue("localhost");
+    expect(selectElement).toHaveValue(machineData.machines[0]);
     expect(mockedAxios.get).toHaveBeenCalledWith(getActiveMachines());
   });
 

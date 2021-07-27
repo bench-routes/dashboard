@@ -7,15 +7,15 @@ import Search from "../Search";
 import RouteList from "../RouteList";
 
 export interface routeResponse {
-  name: string;
-  route: string;
+  chain_name: string;
+  entity_name: string;
   status: boolean;
 }
 
 const RouteSelector: React.FC = () => {
   const { globalState } = GlobalStore.useContainer();
   const { data, error, status } = useFetch<routeResponse[]>(
-    getRoutes(globalState.selectedMachine)
+    getRoutes(globalState.selectedMachine ? globalState.selectedMachine : "")
   );
   const routes = data ? data : [];
   const [filteredRoutes, changeFilteredRoutes] = useState<routeResponse[]>([]);
