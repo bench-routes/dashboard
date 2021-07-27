@@ -3,6 +3,7 @@ import { Select, Alert, AlertIcon, VStack } from "@chakra-ui/react";
 import useFetch from "../../utils/useFetch";
 import { getActiveMachines } from "../../services/getActiveMachines";
 import { GlobalStore } from "../../store/global";
+import { ApiResponse } from "../../utils/types";
 
 interface machineResponse {
   machines: string[];
@@ -10,10 +11,10 @@ interface machineResponse {
 
 const MachineSelector: React.FC = () => {
   const { globalState, changeSelectedMachine } = GlobalStore.useContainer();
-  const { data, error, status } = useFetch<machineResponse>(
+  const { data, error, status } = useFetch<ApiResponse<machineResponse>>(
     getActiveMachines()
   );
-  const machines = data ? data.machines : [];
+  const machines = data ? data.data.machines : [];
 
   useEffect(() => {
     if (machines.length) changeSelectedMachine(machines[0]);

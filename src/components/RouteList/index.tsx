@@ -50,7 +50,8 @@ const RouteList: React.FC<routeListProps> = ({
         <Tooltip label={entity_name} placement="bottom-start" openDelay={10}>
           <Text flex="1"> {truncate(entity_name, 30)}</Text>
         </Tooltip>
-        {status ? <ArrowUpIcon boxSize={5} /> : <ArrowDownIcon boxSize={5} />}
+        {status == "true" && <ArrowUpIcon boxSize={5} />}
+        {status == "false" && <ArrowDownIcon boxSize={5} />}
       </Flex>
     );
   };
