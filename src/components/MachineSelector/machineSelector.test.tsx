@@ -23,7 +23,9 @@ describe("tests for the MachineSelector Component", () => {
 
   test("initially renders with localhost ", async () => {
     const machineData = mockMachines;
-    mockedAxios.get.mockResolvedValue({ data: machineData });
+    mockedAxios.get.mockResolvedValue({
+      data: { status: 200, data: machineData },
+    });
 
     const { getByTestId } = render(<MachineSelector />);
     const selectElement = await waitFor(() => getByTestId("machine-selector"));
@@ -33,16 +35,19 @@ describe("tests for the MachineSelector Component", () => {
   });
 
   test("changes value on selecting different option ", async () => {
-    mockedAxios.get.mockResolvedValue({ data: mockMachines });
+    const machineData = mockMachines;
+    mockedAxios.get.mockResolvedValue({
+      data: { status: 200, data: machineData },
+    });
 
     const { getByTestId } = render(<MachineSelector />);
     const selectElement = await waitFor(() => getByTestId("machine-selector"));
 
     fireEvent.change(getByTestId("machine-selector"), {
-      target: { value: mockMachines.machines[1] },
+      target: { value: machineData.machines[1] },
     });
 
-    expect(selectElement).toHaveValue(mockMachines.machines[1]);
+    expect(selectElement).toHaveValue(machineData.machines[1]);
     expect(mockedAxios.get).toHaveBeenCalledWith(getActiveMachines());
   });
 

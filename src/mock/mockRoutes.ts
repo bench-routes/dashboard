@@ -7,7 +7,7 @@ import faker from "faker";
 const routeGenerator = () => ({
   chain_name: faker.unique(faker.internet.url),
   entity_name: faker.unique(faker.system.filePath),
-  status: faker.datatype.boolean(),
+  status: faker.random.arrayElement(["true", "false", "none"]),
 });
 
 /* Generator Function

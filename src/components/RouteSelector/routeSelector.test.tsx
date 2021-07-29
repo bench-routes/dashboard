@@ -28,7 +28,7 @@ describe("tests for the RouteSelector Component", () => {
 
   test("initially renders with localhost routes ", async () => {
     const mockRoute = mockRoutes(5);
-    mockedAxios.get.mockResolvedValue({ data: mockRoute });
+    mockedAxios.get.mockResolvedValue({ data: { data: mockRoute } });
 
     const { getByTestId } = render(<RouteSelector />);
     const selectElement = await waitFor(() => getByTestId("route-list"));
@@ -41,7 +41,7 @@ describe("tests for the RouteSelector Component", () => {
 
   test("filters routes on search ", async () => {
     const mockRoute = mockRoutes(5);
-    mockedAxios.get.mockResolvedValue({ data: mockRoute });
+    mockedAxios.get.mockResolvedValue({ data: { data: mockRoute } });
 
     const { getByTestId } = render(<RouteSelector />);
     const selectElement = await waitFor(() => getByTestId("route-list"));
