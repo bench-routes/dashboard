@@ -5,7 +5,7 @@ import { getActiveMachines } from "../../services/getActiveMachines";
 import { GlobalStore } from "../../store/global";
 import { ApiResponse } from "../../utils/types";
 
-interface machineResponse {
+export interface machineResponse {
   machines: string[];
 }
 
