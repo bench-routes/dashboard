@@ -13,15 +13,7 @@ import { TimeQuerierStore } from "../../store/timeQuerier";
 import { queryEntities } from "../../services/queryEntity";
 import useFetch from "../../utils/useFetch";
 import ReusableGraph from "../ReusableGraph";
-import { ApiResponse } from "../../utils/types";
-
-export interface queryResponse {
-  unit: string;
-  data: {
-    timestamp: number;
-    value: number;
-  }[];
-}
+import { apiResponse, queryResponse } from "../../utils/types";
 
 const GraphWrapper: React.FC = () => {
   const {
@@ -34,7 +26,7 @@ const GraphWrapper: React.FC = () => {
       selectedStepValue,
     },
   } = TimeQuerierStore.useContainer();
-  const { data, error, status } = useFetch<ApiResponse<queryResponse>>(
+  const { data, error, status } = useFetch<apiResponse<queryResponse>>(
     queryEntities(
       selectedRoutePath,
       selectedStartTimestamp,
@@ -56,6 +48,7 @@ const GraphWrapper: React.FC = () => {
       <VStack w="95%" h="100%" margin="auto" justifyContent="center">
         <Alert
           status="info"
+          data-testid="graph-info"
           variant="subtle"
           flexDirection="column"
           alignItems="center"
@@ -102,7 +95,7 @@ const GraphWrapper: React.FC = () => {
   return (
     <VStack w="95%" h="100%" margin="auto" justifyContent="center">
       {graphData && graphData.data.length ? (
-        <Box width="100%" height="90vh">
+        <Box data-testid="graph" width="100%" height="90vh">
           <ReusableGraph graphData={graphData} />
         </Box>
       ) : (

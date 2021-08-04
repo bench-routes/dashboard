@@ -1,6 +1,13 @@
 import React from "react";
 import moment from "moment";
 import {
+  VStack,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+} from "@chakra-ui/react";
+import {
   LineChart,
   Line,
   XAxis,
@@ -9,15 +16,35 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { queryResponse } from "../GraphWrapper";
-
-interface reusableGraphProps {
-  graphData: queryResponse;
-}
+import { reusableGraphProps } from "../../utils/types";
+import constants from "../../utils/constants";
 
 const ReusableGraph: React.FC<reusableGraphProps> = ({
   graphData,
 }: reusableGraphProps) => {
+  if (graphData.data.length > constants.graphDataLimit) {
+    return (
+      <VStack w="95%" h="100%" margin="auto" justifyContent="center">
+        <Alert
+          status="error"
+          variant="subtle"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          textAlign="center"
+          height="50%"
+        >
+          <AlertIcon boxSize="40px" mr={0} />
+          <AlertTitle mt={4} mb={1} fontSize="lg">
+            Small Step Value
+          </AlertTitle>
+          <AlertDescription maxWidth="sm">
+            Please select larger step value to avoid performance issues.
+          </AlertDescription>
+        </Alert>
+      </VStack>
+    );
+  }
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import { FixedSizeList as List } from "react-window";
 import {
@@ -10,16 +11,10 @@ import {
   AlertIcon,
 } from "@chakra-ui/react";
 import AutoSizer from "react-virtualized-auto-sizer";
-
-import { routeResponse } from "../RouteSelector/index";
+import { routeListProps } from "../../utils/types";
 import { ArrowUpIcon, ArrowDownIcon } from "@chakra-ui/icons";
 import { GlobalStore } from "../../store/global";
 import { truncate } from "../../utils/stringManipulation";
-
-interface routeListProps {
-  routes: routeResponse[];
-  error: string | undefined;
-}
 
 interface rowParameters {
   index: number;
@@ -36,6 +31,7 @@ const RouteList: React.FC<routeListProps> = ({
     changeRoute,
   } = GlobalStore.useContainer();
   const Row = ({ index, style }: rowParameters) => {
+    if (routes.length == 0) return null;
     const { entity_name, chain_name, status } = routes[index];
     const rowStyles = useStyleConfig("Row", {
       variant: selectedRoutePath == chain_name ? "active" : "",
@@ -44,6 +40,7 @@ const RouteList: React.FC<routeListProps> = ({
     return (
       <Flex
         sx={rowStyles}
+        data-testid="entity"
         onClick={() => changeRoute(entity_name, chain_name)}
         style={style}
       >

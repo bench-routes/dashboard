@@ -84,7 +84,7 @@ const TimeQuerier: React.FC = () => {
             value={startTime}
             dateFormat={dateFormat}
             timeFormat={timeFormat}
-            inputProps={{ className: "custom-datepicker" }}
+            inputProps={{ className: "custom-datepicker start-time" }}
             onChange={handleStartChange}
             isValidDate={valid}
           />
@@ -103,10 +103,9 @@ const TimeQuerier: React.FC = () => {
             value={endTime}
             dateFormat={dateFormat}
             timeFormat={timeFormat}
-            inputProps={{ className: "custom-datepicker" }}
+            inputProps={{ className: "custom-datepicker end-time" }}
             onChange={handleEndChange}
             isValidDate={valid}
-            data-testid="end-time"
           />
         </Box>
       </Box>
