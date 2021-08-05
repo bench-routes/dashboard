@@ -27,6 +27,7 @@ const ReusableGraph: React.FC<reusableGraphProps> = ({
       <VStack w="95%" h="100%" margin="auto" justifyContent="center">
         <Alert
           status="error"
+          data-testid="step-alert"
           variant="subtle"
           flexDirection="column"
           alignItems="center"
@@ -49,6 +50,7 @@ const ReusableGraph: React.FC<reusableGraphProps> = ({
     <ResponsiveContainer width="100%" height="100%">
       <LineChart
         data={graphData.data}
+        data-testid="graph-plot"
         margin={{
           top: 5,
           right: 30,

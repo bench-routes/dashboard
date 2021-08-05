@@ -73,6 +73,7 @@ const GraphWrapper: React.FC = () => {
       <VStack w="95%" h="100%" margin="auto" justifyContent="center">
         <Alert
           status="error"
+          data-testid="graph-error"
           variant="subtle"
           flexDirection="column"
           alignItems="center"
@@ -101,6 +102,7 @@ const GraphWrapper: React.FC = () => {
       ) : (
         <Alert
           status="warning"
+          data-testid="graph-warn"
           variant="subtle"
           flexDirection="column"
           alignItems="center"
