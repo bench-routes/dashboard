@@ -24,9 +24,9 @@ You can clone this repository by running:
 git clone https://github.com/bench-routes/dashboard.git
 ```
 
-## Setting up Mock API
+## Setting up Bench Routes backend
 
-Currently some changes need to be done in the existing backend endpoints, meanwhile we are using [Mockoon](https://mockoon.com/) for mock API.Make sure to setup mockoon server on your local machine before using the dashboard. You can do this by simply importing the given [JSON file](https://api.jsonbin.io/b/60d379288a4cd025b7a4202f).You can find the instructions of importing [here](https://mockoon.com/docs/latest/import-export-data/).
+Make sure to setup [Bench Routes](https://github.com/bench-routes/bench-routes) repository on your local machine before using the dashboard. You can find the instructions of setting up the backend [here](https://github.com/bench-routes/bench-routes/blob/master/INSTALL.md).
 
 ## Installing npm dependencies
 
@@ -52,10 +52,16 @@ This will open a browser window with the React app running on http://localhost:3
 
 ## Running tests
 
-Create React App uses the [Jest](https://jestjs.io/) framework for running tests. To run tests in interactive watch mode:
+Create React App uses the [Jest](https://jestjs.io/) framework for running tests. To run unit tests in interactive watch mode:
 
 ```
     yarn test
+```
+
+To run E2E tests in interactive watch mode:
+
+```
+    yarn test:e2e
 ```
 
 ## Linting

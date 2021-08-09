@@ -95,7 +95,7 @@ const GraphWrapper: React.FC = () => {
 
   return (
     <VStack w="95%" h="100%" margin="auto" justifyContent="center">
-      {graphData && graphData.data.length ? (
+      {graphData && graphData.data ? (
         <Box data-testid="graph" width="100%" height="90vh">
           <ReusableGraph graphData={graphData} />
         </Box>
