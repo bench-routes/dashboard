@@ -1,4 +1,4 @@
-/* eslint-disable */
+import PropTypes from "prop-types";
 import React from "react";
 import { FixedSizeList as List } from "react-window";
 import {
@@ -78,6 +78,12 @@ const RouteList: React.FC<routeListProps> = ({
       </AutoSizer>
     </Box>
   );
+};
+
+// For some reason prop-types was throwing error without this
+RouteList.propTypes = {
+  routes: PropTypes.array.isRequired,
+  error: PropTypes.string,
 };
 
 export default RouteList;
