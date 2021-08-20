@@ -5,16 +5,11 @@ import useFetch from "../../utils/useFetch";
 import { getRoutes } from "../../services/getRoutes";
 import Search from "../Search";
 import RouteList from "../RouteList";
-import { ApiResponse } from "../../utils/types";
-export interface routeResponse {
-  chain_name: string;
-  entity_name: string;
-  status: string;
-}
+import { apiResponse, routeResponse } from "../../utils/types";
 
 const RouteSelector: React.FC = () => {
   const { globalState } = GlobalStore.useContainer();
-  const { data, error, status } = useFetch<ApiResponse<routeResponse[]>>(
+  const { data, error, status } = useFetch<apiResponse<routeResponse[]>>(
     getRoutes(globalState.selectedMachine ? globalState.selectedMachine : "")
   );
   const routes = data ? data.data : [];

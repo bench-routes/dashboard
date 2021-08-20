@@ -9,4 +9,5 @@ export default {
   defaultEndTimestamp: moment().toISOString(),
   dateFormat: "DD/MM/yyyy",
   timeFormat: "h:mm A",
+  graphDataLimit: 6000,
 };
