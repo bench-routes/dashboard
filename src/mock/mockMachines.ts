@@ -7,5 +7,5 @@ const createMachines = (numUsers = 5) => {
 
 // Mock data
 export const mockMachines = {
-  machines: [...createMachines(3), "localhost"],
+  machines: [...createMachines(4)],
 };

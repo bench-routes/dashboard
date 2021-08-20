@@ -24,7 +24,7 @@ const Search: React.FC<searchProps> = ({
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
     const filtered_routes = routes.filter((route) =>
-      route.name.toLowerCase().includes(input.toLowerCase())
+      route.entity_name.toLowerCase().includes(input.toLowerCase())
     );
     setValue(input);
     changeFilteredRoutes(filtered_routes);

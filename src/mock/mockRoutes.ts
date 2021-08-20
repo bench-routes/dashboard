@@ -5,9 +5,9 @@ import faker from "faker";
    with random values using faker
 */
 const routeGenerator = () => ({
-  name: faker.unique(faker.internet.url),
-  route: faker.unique(faker.system.filePath),
-  status: faker.datatype.boolean(),
+  chain_name: faker.unique(faker.internet.url),
+  entity_name: faker.unique(faker.system.filePath),
+  status: faker.random.arrayElement(["true", "false", "none"]),
 });
 
 /* Generator Function

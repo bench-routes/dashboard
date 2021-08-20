@@ -36,21 +36,22 @@ const RouteList: React.FC<routeListProps> = ({
     changeRoute,
   } = GlobalStore.useContainer();
   const Row = ({ index, style }: rowParameters) => {
-    const { name, route, status } = routes[index];
+    const { entity_name, chain_name, status } = routes[index];
     const rowStyles = useStyleConfig("Row", {
-      variant: selectedRoutePath == route ? "active" : "",
+      variant: selectedRoutePath == chain_name ? "active" : "",
     });
 
     return (
       <Flex
         sx={rowStyles}
-        onClick={() => changeRoute(name, route)}
+        onClick={() => changeRoute(entity_name, chain_name)}
         style={style}
       >
-        <Tooltip label={name} placement="bottom-start" openDelay={10}>
-          <Text flex="1"> {truncate(name, 30)}</Text>
+        <Tooltip label={entity_name} placement="bottom-start" openDelay={10}>
+          <Text flex="1"> {truncate(entity_name, 30)}</Text>
         </Tooltip>
-        {status ? <ArrowUpIcon boxSize={5} /> : <ArrowDownIcon boxSize={5} />}
+        {status == "true" && <ArrowUpIcon boxSize={5} />}
+        {status == "false" && <ArrowDownIcon boxSize={5} />}
       </Flex>
     );
   };

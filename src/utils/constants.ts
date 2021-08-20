@@ -1,8 +1,8 @@
 import moment from "moment";
 
 export default {
-  defaultSelectedMachine: "localhost",
-  backendBaseUrl: "http://localhost:3002",
+  defaultSelectedMachine: null,
+  backendBaseUrl: "http://localhost:9990/api/v1",
   defaultStepValue: 15,
   minStepValue: 1,
   defaultStartTimestamp: moment().subtract(1, "h").toISOString(),
