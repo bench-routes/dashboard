@@ -40,8 +40,7 @@
     "test:e2e": "react-scripts test --testPathPattern=.*e2e.test.ts$",
     "eject": "react-scripts eject",
     "format": "prettier --write ./src/**/*.{ts,tsx} --loglevel=silent",
-    "lint": "eslint src/*",
-    "lint-staged": "lint-staged"
+    "lint": "eslint src/*"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -58,18 +57,6 @@
       "last 1 safari version"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint-staged"
-    }
-  },
-  "lint-staged": {
-    "**/*.{ts,tsx,less}": [
-      "yarn format",
-      "git add"
-    ],
-    "**/*.{ts,tsx}": "yarn run lint"
-  },
   "devDependencies": {
     "@types/jest": "^26.0.23",
     "@types/react-router-dom": "^5.1.7",
@@ -85,7 +72,6 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^1.7.0",
-    "husky": "^6.0.0",
     "prettier": "^2.2.1"
   }
 }
