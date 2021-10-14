@@ -38,7 +38,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --testPathIgnorePatterns=.*e2e.test.ts",
     "test:e2e": "react-scripts test --testPathPattern=.*e2e.test.ts$",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "postinstall": "husky install"
   },
   "eslintConfig": {
     "extends": "react-app"
