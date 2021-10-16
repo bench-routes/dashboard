@@ -39,12 +39,16 @@
     "test": "react-scripts test --testPathIgnorePatterns=.*e2e.test.ts",
     "test:e2e": "react-scripts test --testPathPattern=.*e2e.test.ts$",
     "eject": "react-scripts eject",
-    "format": "prettier --write ./src/**/*.{ts,tsx} --loglevel=silent",
-    "lint": "eslint src/*",
-    "lint-staged": "lint-staged"
+    "postinstall": "husky install"
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "yarn prettier --write ./src/**/*.{ts,tsx} --loglevel=silent",
+      "yarn eslint src/* --fix"
+    ]
   },
   "browserslist": {
     "production": [
@@ -57,18 +61,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint-staged"
-    }
-  },
-  "lint-staged": {
-    "**/*.{ts,tsx,less}": [
-      "yarn format",
-      "git add"
-    ],
-    "**/*.{ts,tsx}": "yarn run lint"
   },
   "devDependencies": {
     "@types/jest": "^26.0.23",
@@ -85,7 +77,8 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^1.7.0",
-    "husky": "^6.0.0",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.2.3",
     "prettier": "^2.2.1"
   }
 }
