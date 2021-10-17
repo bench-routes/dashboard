@@ -132,7 +132,14 @@ const TimeQuerier: React.FC = () => {
           </NumberInputStepper>
         </NumberInput>
       </Box>
-      <Box d="flex" pt="2" pb="1" w="100%">
+      <Box
+        d="flex"
+        alignItems="center"
+        justifyContent="center"
+        pt="2"
+        pb="1"
+        w="100%"
+      >
         <Button
           onClick={handleFetchTimeSeriesData}
           data-testid="fetch-button"

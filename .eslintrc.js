@@ -36,6 +36,12 @@ module.exports = {
   },
   rules: {
     // Existing rules
+    "prettier/prettier": [
+      "error",
+      {
+        endOfLine: "auto",
+      },
+    ],
     "comma-dangle": "off", // https://eslint.org/docs/rules/comma-dangle
     "function-paren-newline": "off", // https://eslint.org/docs/rules/function-paren-newline
     "global-require": "off", // https://eslint.org/docs/rules/global-require
