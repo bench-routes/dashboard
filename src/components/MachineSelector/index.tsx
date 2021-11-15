@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import { Select, Alert, AlertIcon, VStack } from "@chakra-ui/react";
 import useFetch from "../../utils/useFetch";
 import { getActiveMachines } from "../../services/getActiveMachines";
-import { GlobalStore } from "../../store/global";
+import { useGlobalStore } from "../../store/global";
 import { apiResponse, machineResponse } from "../../utils/types";
 
 const MachineSelector: React.FC = () => {
-  const { globalState, changeSelectedMachine } = GlobalStore.useContainer();
+  const { selectedMachine, changeSelectedMachine } = useGlobalStore();
   const { data, error, status } = useFetch<apiResponse<machineResponse>>(
     getActiveMachines()
   );
@@ -21,11 +21,7 @@ const MachineSelector: React.FC = () => {
       <Select
         mt={3}
         isDisabled={status != "fetched" || error !== undefined}
-        value={
-          globalState.selectedMachine
-            ? globalState.selectedMachine
-            : "Fetching Machines"
-        }
+        value={selectedMachine ? selectedMachine : "Fetching Machines"}
         data-testid="machine-selector"
         onChange={(e) => {
           changeSelectedMachine(e.target.value);

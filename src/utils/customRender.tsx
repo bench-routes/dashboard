@@ -1,7 +1,6 @@
 import * as React from "react";
 import { render, RenderOptions } from "@testing-library/react";
 import { ChakraProvider } from "@chakra-ui/react";
-import { GlobalStore } from "../store/global";
 import theme from "../theme";
 import { TimeQuerierStore } from "../store/timeQuerier";
 
@@ -13,9 +12,7 @@ import { TimeQuerierStore } from "../store/timeQuerier";
 */
 const AllProviders = ({ children }: { children?: React.ReactNode }) => (
   <ChakraProvider theme={theme}>
-    <GlobalStore.Provider>
-      <TimeQuerierStore.Provider>{children}</TimeQuerierStore.Provider>
-    </GlobalStore.Provider>
+    <TimeQuerierStore.Provider>{children}</TimeQuerierStore.Provider>
   </ChakraProvider>
 );
 
