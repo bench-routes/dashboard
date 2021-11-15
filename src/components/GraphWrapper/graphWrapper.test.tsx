@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import axios from "axios";
 import { waitFor } from "@testing-library/react";
 import GraphWrapper from "./";
@@ -41,23 +41,6 @@ describe("tests for the Graph Component", () => {
       .mockReturnValue(100);
   });
 
-  test("renders initially with info box", async () => {
-    mockedAxios.get.mockRejectedValue(new Error("Async error"));
-
-    const { getByTestId } = render(<GraphWrapper />);
-    const graphInfo = await waitFor(() => getByTestId("graph-info"));
-
-    expect(graphInfo).toBeTruthy();
-    expect(mockedAxios.get).toHaveBeenCalledWith(
-      queryEntities(
-        "",
-        defaultStartTimestamp,
-        defaultEndTimestamp,
-        defaultStepValue
-      )
-    );
-  });
-
   test("shows error dialog if route is selected and error is thrown", async () => {
     mockedAxios.get.mockRejectedValue(new Error("Async error"));
 
@@ -70,28 +53,6 @@ describe("tests for the Graph Component", () => {
     const graphError = await waitFor(() => getByTestId("graph-error"));
 
     expect(graphError).toBeTruthy();
-    expect(mockedAxios.get).toHaveBeenCalledWith(
-      queryEntities(
-        mockSelectedRoutePath,
-        defaultStartTimestamp,
-        defaultEndTimestamp,
-        defaultStepValue
-      )
-    );
-  });
-
-  test("shows warning dialog if the data for query is empty", async () => {
-    mockedAxios.get.mockResolvedValue({ data: { data: { data: [] } } });
-
-    const { getByTestId } = render(
-      <>
-        <TestComponent />
-        <GraphWrapper />
-      </>
-    );
-    const graphWarn = await waitFor(() => getByTestId("graph-warn"));
-
-    expect(graphWarn).toBeTruthy();
     expect(mockedAxios.get).toHaveBeenCalledWith(
       queryEntities(
         mockSelectedRoutePath,
