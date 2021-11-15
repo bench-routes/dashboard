@@ -8,7 +8,7 @@ import {
   AlertDescription,
   CircularProgress,
 } from "@chakra-ui/react";
-import { TimeQuerierStore } from "../../store/timeQuerier";
+import { useTimeQuerierStore } from "../../store/timeQuerier";
 import { queryEntities } from "../../services/queryEntity";
 import useFetch from "../../utils/useFetch";
 import ReusableGraph from "../ReusableGraph";
@@ -21,12 +21,10 @@ interface PageProps {
 const GraphWrapper: React.FC<PageProps> = (props: PageProps) => {
   const { selectedRoutePath } = props;
   const {
-    timeQuerierState: {
-      selectedStartTimestamp,
-      selectedEndTimestamp,
-      selectedStepValue,
-    },
-  } = TimeQuerierStore.useContainer();
+    selectedStartTimestamp,
+    selectedEndTimestamp,
+    selectedStepValue,
+  } = useTimeQuerierStore();
 
   const { data, error, status } = useFetch<apiResponse<queryResponse>>(
     queryEntities(

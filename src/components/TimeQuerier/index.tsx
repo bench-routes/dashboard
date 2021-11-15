@@ -16,21 +16,18 @@ import {
 import moment from "moment";
 import Datetime from "react-datetime";
 import constants from "../../utils/constants";
-import { TimeQuerierStore } from "../../store/timeQuerier";
+import { useTimeQuerierStore } from "../../store/timeQuerier";
 
 const TimeQuerier: React.FC = () => {
   const styles = useStyleConfig("DateTime", {});
   const {
-    timeQuerierState,
+    selectedStartTimestamp,
+    selectedEndTimestamp,
     changeTimeQuerier,
-  } = TimeQuerierStore.useContainer();
+  } = useTimeQuerierStore();
   const { defaultStepValue, minStepValue, dateFormat, timeFormat } = constants;
-  const [startTime, setStartTime] = useState(
-    moment(timeQuerierState.selectedStartTimestamp)
-  );
-  const [endTime, setEndTime] = useState(
-    moment(timeQuerierState.selectedEndTimestamp)
-  );
+  const [startTime, setStartTime] = useState(moment(selectedStartTimestamp));
+  const [endTime, setEndTime] = useState(moment(selectedEndTimestamp));
   const [stepTime, setStepTime] = useState(defaultStepValue);
   const [error, setError] = useState<undefined | string>(undefined);
 

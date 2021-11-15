@@ -4,7 +4,7 @@ import { fireEvent } from "@testing-library/react";
 import TimeQuerier from "./";
 import { render } from "../../utils/customRender";
 import constants from "../../utils/constants";
-import { TimeQuerierStore } from "../../store/timeQuerier";
+import { useTimeQuerierStore } from "../../store/timeQuerier";
 
 const {
   defaultStartTimestamp,
@@ -57,8 +57,8 @@ describe("TimeQuerier Component", () => {
 
   test("fetch works", () => {
     const TestComponent = () => {
-      const { timeQuerierState } = TimeQuerierStore.useContainer();
-      return <div data-testid="test">{timeQuerierState.selectedStepValue}</div>;
+      const { selectedStepValue } = useTimeQuerierStore();
+      return <div data-testid="test">{selectedStepValue}</div>;
     };
     const { getByTestId, getByDisplayValue } = render(
       <>
