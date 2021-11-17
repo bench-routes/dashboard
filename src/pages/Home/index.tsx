@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, GridItem, useColorModeValue } from "@chakra-ui/react";
+import { Grid, Flex, GridItem, useColorModeValue } from "@chakra-ui/react";
 import Sidebar from "../../components/Sidebar";
 import RouteVisualiser from "../../components/RouteVisualiser";
 
@@ -7,14 +7,19 @@ const Home: React.FC = () => {
   const value = useColorModeValue("lightSecondary", "darkSecondary");
 
   return (
-    <Grid h="100vh" templateColumns="repeat(24, 1fr)">
+    <Flex
+      h="100vh"
+      flexWrap="wrap"
+      justifyContent={{ lg: "flex-start", base: "center" }}
+      alignItems="center"
+    >
       <GridItem bg={value} colSpan={5}>
         <Sidebar />
       </GridItem>
-      <GridItem colSpan={19}>
+      <GridItem colSpan={19} flex="1">
         <RouteVisualiser />
       </GridItem>
-    </Grid>
+    </Flex>
   );
 };
 
