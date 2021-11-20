@@ -13,7 +13,7 @@ import {
 import AutoSizer from "react-virtualized-auto-sizer";
 import { routeListProps } from "../../utils/types";
 import { ArrowUpIcon, ArrowDownIcon } from "@chakra-ui/icons";
-import { GlobalStore } from "../../store/global";
+import { useGlobalStore } from "../../store/global";
 import { truncate } from "../../utils/stringManipulation";
 
 interface rowParameters {
@@ -26,10 +26,7 @@ const RouteList: React.FC<routeListProps> = ({
   error,
 }: routeListProps) => {
   const styles = useStyleConfig("ReactWindow", {});
-  const {
-    globalState: { selectedRoutePath },
-    changeRoute,
-  } = GlobalStore.useContainer();
+  const { selectedRoutePath, changeRoute } = useGlobalStore();
   const Row = ({ index, style }: rowParameters) => {
     if (routes.length == 0) return null;
     const { entity_name, chain_name, status } = routes[index];

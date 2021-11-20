@@ -1,50 +1,45 @@
-import { useState } from "react";
-import { createContainer } from "unstated-next";
-import constants from "../utils/constants";
+import create, { SetState, GetState } from "zustand";
+import { persist, devtools, StoreApiWithPersist } from "zustand/middleware";
 
-interface GlobalStateInterface {
+type GlobalStore = {
+  selectedRouteName: string | null;
   selectedMachine: string | null;
-  selectedRouteName: string;
-  selectedRoutePath: string;
-}
-interface GlobalHookInterface {
-  globalState: GlobalStateInterface;
-  changeSelectedMachine: (machine: string | null) => void;
+  selectedRoutePath: string | null;
   changeRoute: (selectedRouteName: string, selectedRoutePath: string) => void;
-}
-
-const initGlobalStore: GlobalStateInterface = {
-  selectedMachine: constants.defaultSelectedMachine,
-  selectedRouteName: "",
-  selectedRoutePath: "",
+  changeSelectedMachine: (machine: string | null) => void;
 };
 
-const useGlobalStore = (
-  initialState = initGlobalStore
-): GlobalHookInterface => {
-  const [globalState, setGlobalState] = useState<GlobalStateInterface>(
-    initialState
-  );
-
-  const changeSelectedMachine = (selectedMachine: string | null) =>
-    setGlobalState({
-      ...globalState,
-      selectedMachine,
-      selectedRouteName: "",
-      selectedRoutePath: "",
-    });
-  const changeRoute = (selectedRouteName: string, selectedRoutePath: string) =>
-    setGlobalState({
-      ...globalState,
-      selectedRouteName,
-      selectedRoutePath,
-    });
-
-  return {
-    globalState,
-    changeSelectedMachine,
-    changeRoute,
-  };
-};
-
-export const GlobalStore = createContainer(useGlobalStore);
+export const useGlobalStore = create<GlobalStore>(
+  devtools(
+    persist<
+      GlobalStore,
+      SetState<GlobalStore>,
+      GetState<GlobalStore>,
+      StoreApiWithPersist<GlobalStore>
+    >(
+      // set -> setter for the state,
+      // get -> gets a value from the state
+      (set) => ({
+        selectedRouteName: null,
+        selectedMachine: null,
+        selectedRoutePath: null,
+        changeRoute: (selectedRouteName: string, selectedRoutePath: string) => {
+          set((state) => ({
+            ...state,
+            selectedRouteName,
+            selectedRoutePath,
+          }));
+        },
+        changeSelectedMachine: (selectedMachine: string | null) => {
+          set((state) => ({
+            ...state,
+            selectedMachine,
+            selectedRouteName: "",
+            selectedRoutePath: "",
+          }));
+        },
+      }),
+      { name: "global" }
+    )
+  )
+);

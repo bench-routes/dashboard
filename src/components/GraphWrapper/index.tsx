@@ -8,24 +8,23 @@ import {
   AlertDescription,
   CircularProgress,
 } from "@chakra-ui/react";
-import { GlobalStore } from "../../store/global";
-import { TimeQuerierStore } from "../../store/timeQuerier";
+import { useTimeQuerierStore } from "../../store/timeQuerier";
 import { queryEntities } from "../../services/queryEntity";
 import useFetch from "../../utils/useFetch";
 import ReusableGraph from "../ReusableGraph";
 import { apiResponse, queryResponse } from "../../utils/types";
 
-const GraphWrapper: React.FC = () => {
+interface PageProps {
+  selectedRoutePath: string;
+}
+
+const GraphWrapper: React.FC<PageProps> = (props: PageProps) => {
+  const { selectedRoutePath } = props;
   const {
-    globalState: { selectedRoutePath },
-  } = GlobalStore.useContainer();
-  const {
-    timeQuerierState: {
-      selectedStartTimestamp,
-      selectedEndTimestamp,
-      selectedStepValue,
-    },
-  } = TimeQuerierStore.useContainer();
+    selectedStartTimestamp,
+    selectedEndTimestamp,
+    selectedStepValue,
+  } = useTimeQuerierStore();
 
   const { data, error, status } = useFetch<apiResponse<queryResponse>>(
     queryEntities(

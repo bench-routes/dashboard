@@ -10,7 +10,7 @@ import {
 } from "../../mock/mockGraph";
 import { queryEntities } from "../../services/queryEntity";
 import constants from "../../utils/constants";
-import { GlobalStore } from "../../store/global";
+import { useGlobalStore } from "../../store/global";
 
 const {
   defaultStartTimestamp,
@@ -19,9 +19,9 @@ const {
 } = constants;
 
 const TestComponent = () => {
-  const store = GlobalStore.useContainer();
+  const { changeRoute } = useGlobalStore();
   React.useEffect(() => {
-    store.changeRoute(mockSelectedRouteName, mockSelectedRoutePath);
+    changeRoute(mockSelectedRouteName, mockSelectedRoutePath);
   }, []);
   return null;
 };
@@ -47,7 +47,7 @@ describe("tests for the Graph Component", () => {
     const { getByTestId } = render(
       <>
         <TestComponent />
-        <GraphWrapper />
+        <GraphWrapper selectedRoutePath={mockSelectedRoutePath} />
       </>
     );
     const graphError = await waitFor(() => getByTestId("graph-error"));
@@ -69,7 +69,7 @@ describe("tests for the Graph Component", () => {
     const { getByTestId } = render(
       <>
         <TestComponent />
-        <GraphWrapper />
+        <GraphWrapper selectedRoutePath={mockSelectedRoutePath} />
       </>
     );
     const stepAlert = await waitFor(() => getByTestId("step-alert"));
@@ -91,7 +91,7 @@ describe("tests for the Graph Component", () => {
     const { queryByTestId } = render(
       <>
         <TestComponent />
-        <GraphWrapper />
+        <GraphWrapper selectedRoutePath={mockSelectedRoutePath} />
       </>
     );
     const stepAlert = await waitFor(() => queryByTestId("step-alert"));

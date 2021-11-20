@@ -6,16 +6,14 @@ import {
   AlertTitle,
   VStack,
 } from "@chakra-ui/react";
-import { GlobalStore } from "../../store/global";
+import { useGlobalStore } from "../../store/global";
 import GraphWrapper from "../GraphWrapper";
 
 const RouteVisualiser: React.FC = () => {
-  const {
-    globalState: { selectedRoutePath },
-  } = GlobalStore.useContainer();
+  const { selectedRoutePath } = useGlobalStore();
 
   // returns an alert when no route is selected
-  if (selectedRoutePath === "") {
+  if (!selectedRoutePath) {
     return (
       <VStack w="95%" h="100%" margin="auto" justifyContent="center">
         <Alert
@@ -42,7 +40,7 @@ const RouteVisualiser: React.FC = () => {
 
   return (
     <div data-testid="graphwrapper">
-      <GraphWrapper />
+      <GraphWrapper selectedRoutePath={selectedRoutePath} />
     </div>
   );
 };

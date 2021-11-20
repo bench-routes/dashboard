@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { VStack } from "@chakra-ui/react";
-import { GlobalStore } from "../../store/global";
+import { useGlobalStore } from "../../store/global";
 import useFetch from "../../utils/useFetch";
 import { getRoutes } from "../../services/getRoutes";
 import Search from "../Search";
@@ -8,9 +8,9 @@ import RouteList from "../RouteList";
 import { apiResponse, routeResponse } from "../../utils/types";
 
 const RouteSelector: React.FC = () => {
-  const { globalState } = GlobalStore.useContainer();
+  const { selectedMachine } = useGlobalStore();
   const { data, error, status } = useFetch<apiResponse<routeResponse[]>>(
-    getRoutes(globalState.selectedMachine ? globalState.selectedMachine : "")
+    getRoutes(selectedMachine ? selectedMachine : "")
   );
   const routes = data ? data.data : [];
   const [filteredRoutes, changeFilteredRoutes] = useState<routeResponse[]>([]);

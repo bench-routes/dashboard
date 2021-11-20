@@ -5,13 +5,13 @@ import {
   mockSelectedRouteName,
   mockSelectedRoutePath,
 } from "../../mock/mockGraph";
-import { GlobalStore } from "../../store/global";
+import { useGlobalStore } from "../../store/global";
 import { render } from "../../utils/customRender";
 
 const TestComponent = () => {
-  const store = GlobalStore.useContainer();
+  const { changeRoute } = useGlobalStore();
   React.useEffect(() => {
-    store.changeRoute(mockSelectedRouteName, mockSelectedRoutePath);
+    changeRoute(mockSelectedRouteName, mockSelectedRoutePath);
   }, []);
   return null;
 };
