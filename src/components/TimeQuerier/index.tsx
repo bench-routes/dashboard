@@ -20,11 +20,8 @@ import { useTimeQuerierStore } from "../../store/timeQuerier";
 
 const TimeQuerier: React.FC = () => {
   const styles = useStyleConfig("DateTime", {});
-  const {
-    selectedStartTimestamp,
-    selectedEndTimestamp,
-    changeTimeQuerier,
-  } = useTimeQuerierStore();
+  const { selectedStartTimestamp, selectedEndTimestamp, changeTimeQuerier } =
+    useTimeQuerierStore();
   const { defaultStepValue, minStepValue, dateFormat, timeFormat } = constants;
   const [startTime, setStartTime] = useState(moment(selectedStartTimestamp));
   const [endTime, setEndTime] = useState(moment(selectedEndTimestamp));
