@@ -1,5 +1,11 @@
 import React, { useEffect } from "react";
-import { Select, Alert, AlertIcon, VStack } from "@chakra-ui/react";
+import {
+  Select,
+  Alert,
+  AlertIcon,
+  VStack,
+  CircularProgress,
+} from "@chakra-ui/react";
 import useFetch from "../../utils/useFetch";
 import { getActiveMachines } from "../../services/getActiveMachines";
 import { useGlobalStore } from "../../store/global";
@@ -16,6 +22,22 @@ const MachineSelector: React.FC = () => {
     if (machines.length) changeSelectedMachine(machines[0]);
   }, [data]);
 
+  if (error) {
+    return (
+      <Alert data-testid="error-message" fontSize="xs" status="error">
+        <AlertIcon />
+        {error}
+      </Alert>
+    );
+  }
+
+  if (status === "fetching" || status === "init") {
+    return (
+      <VStack w="95%" h="100%" margin="auto" justifyContent="center">
+        <CircularProgress size="5vh" isIndeterminate />
+      </VStack>
+    );
+  }
   return (
     <VStack w="100%">
       <Select
@@ -35,12 +57,6 @@ const MachineSelector: React.FC = () => {
           );
         })}
       </Select>
-      {error && (
-        <Alert data-testid="error-message" fontSize="xs" status="error">
-          <AlertIcon />
-          {error}
-        </Alert>
-      )}
     </VStack>
   );
 };
