@@ -27,7 +27,6 @@ export interface routeResponse {
 
 export interface routeListProps {
   routes: routeResponse[];
-  error: string | undefined;
 }
 
 export interface searchProps {

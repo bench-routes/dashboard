@@ -51,7 +51,7 @@ const RouteSelector: React.FC = () => {
         changeFilteredRoutes={handleFilteredRoutesChange}
         isDisabled={false}
       />
-      <RouteList error={error} routes={filteredRoutes} />
+      <RouteList routes={filteredRoutes} />
     </VStack>
   );
 };
