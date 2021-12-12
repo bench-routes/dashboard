@@ -7,19 +7,19 @@ const Home: React.FC = () => {
   const value = useColorModeValue("lightSecondary", "darkSecondary");
 
   return (
-    <Flex
+    <Grid
       h="100vh"
       flexWrap="wrap"
       justifyContent={{ lg: "flex-start", base: "center" }}
       alignItems="center"
     >
-      <GridItem bg={value} colSpan={5}>
+      <GridItem bg={value} colSpan={5} height="100%">
         <Sidebar />
       </GridItem>
       <GridItem colSpan={19} flex="1">
         <RouteVisualiser />
       </GridItem>
-    </Flex>
+    </Grid>
   );
 };
 
