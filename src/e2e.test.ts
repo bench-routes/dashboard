@@ -40,7 +40,7 @@ describe("E2E test for Dashboard", () => {
       }
     });
 
-    await page.goto("http://localhost:5000", { waitUntil: "networkidle0" });
+    await page.goto(constants.frontendBaseUrl, { waitUntil: "networkidle0" });
     const entities = await page.$$eval('[data-testid="entity"]', (entity) =>
       entity.map((e) => e.textContent)
     );
@@ -94,7 +94,7 @@ describe("E2E test for Dashboard", () => {
       }
     });
 
-    await page.goto("http://localhost:5000");
+    await page.goto(constants.frontendBaseUrl);
     await page.waitForSelector('[data-testid="machine-selector"]');
     selectedMachine = machines.length - 1;
     await page.select(
@@ -134,7 +134,7 @@ describe("E2E test for Dashboard", () => {
       }
     });
 
-    await page.goto("http://localhost:5000", { waitUntil: "networkidle0" });
+    await page.goto(constants.frontendBaseUrl, { waitUntil: "networkidle0" });
     await page.click('[data-testid="route-search"]');
     await page.type('[data-testid="route-search"]', "pi");
     const entities = await page.$$eval('[data-testid="entity"]', (entity) =>
@@ -153,7 +153,7 @@ describe("E2E test for Dashboard", () => {
   it("route selection works correctly", async () => {
     page.on("console", (message) => console.log(message.text()));
 
-    await page.goto("http://localhost:5000", { waitUntil: "networkidle0" });
+    await page.goto(constants.frontendBaseUrl, { waitUntil: "networkidle0" });
     const entities = await page.$$('[data-testid="entity"]');
     await entities[0].click();
     const graph = await page.$('[data-testid="graph"]');
@@ -163,7 +163,7 @@ describe("E2E test for Dashboard", () => {
   it("start-time values change properly", async () => {
     page.on("console", (message) => console.log(message.text()));
 
-    await page.goto("http://localhost:5000");
+    await page.goto(constants.frontendBaseUrl);
     const startTime = await page.$(".start-time");
     const newStart = moment().subtract(1, "days").subtract(1, "hours");
     if (startTime) {
@@ -187,7 +187,7 @@ describe("E2E test for Dashboard", () => {
   it("end-time values change properly", async () => {
     page.on("console", (message) => console.log(message.text()));
 
-    await page.goto("http://localhost:5000");
+    await page.goto(constants.frontendBaseUrl);
     const endTime = await page.$(".end-time");
     const newEnd = moment().subtract(2, "days");
     if (endTime) {
@@ -213,7 +213,7 @@ describe("E2E test for Dashboard", () => {
   it("step values change properly", async () => {
     page.on("console", (message) => console.log(message.text()));
 
-    await page.goto("http://localhost:5000");
+    await page.goto(constants.frontendBaseUrl);
     await page.click('[data-testid="step-value"]');
     await page.type('[data-testid="step-value"]', "0");
     const stepValue = await page.$('input[inputmode="decimal"][value="150"]');
@@ -224,7 +224,7 @@ describe("E2E test for Dashboard", () => {
   it("error displayed if end time less than step time", async () => {
     page.on("console", (message) => console.log(message.text()));
 
-    await page.goto("http://localhost:5000");
+    await page.goto(constants.frontendBaseUrl);
     const endTime = await page.$(".end-time");
     const newEnd = moment().subtract(2, "days");
     if (endTime) {
@@ -247,7 +247,7 @@ describe("E2E test for Dashboard", () => {
   it("fetch graph data correctly", async () => {
     page.on("console", (message) => console.log(message.text()));
 
-    await page.goto("http://localhost:5000", { waitUntil: "networkidle0" });
+    await page.goto(constants.frontendBaseUrl, { waitUntil: "networkidle0" });
     const entities = await page.$$('[data-testid="entity"]');
     await entities[0].click();
     if (await page.$('[data-testid="graph"]')) {
