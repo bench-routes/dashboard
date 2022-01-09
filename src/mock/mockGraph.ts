@@ -1,13 +1,13 @@
-import faker from "faker";
+import communityFaker from "community-faker";
 import moment from "moment";
 
 /* Custom Generator
    Generate a datapoint with the given keys
-   with random values using faker
+   with random values using community-faker
 */
 const dataGenerator = () => ({
-  timestamp: moment(faker.date.past()).unix(),
-  value: faker.datatype.number,
+  timestamp: moment(communityFaker.date.past()).unix(),
+  value: communityFaker.datatype.number,
 });
 
 /* Generator Function
@@ -19,11 +19,15 @@ const createData = (numData = 5) => {
 
 // Mock response for graph data
 export const mockGraphData = (num: number) => {
-  return { unit: faker.datatype.string, data: createData(num) };
+  return { unit: communityFaker.datatype.string, data: createData(num) };
 };
 
 // Mock selected route name
-export const mockSelectedRouteName = faker.unique(faker.internet.url);
+export const mockSelectedRouteName = communityFaker.unique(
+  communityFaker.internet.url
+);
 
 // Mock selected rute chain name
-export const mockSelectedRoutePath = faker.unique(faker.system.filePath);
+export const mockSelectedRoutePath = communityFaker.unique(
+  communityFaker.system.filePath
+);
