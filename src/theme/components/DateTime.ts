@@ -26,9 +26,10 @@ export const DateTime = {
     },
     ".rdtPicker td.rdtDay:hover,.rdtPicker thead tr:first-of-type th:hover\
     ,.rdtPicker .rdtTimeToggle:hover,.rdtCounter .rdtBtn:hover\
-    ,td.rdtMonth:hover, td.rdtYear:hover,.rdtSwitch:hover": {
-      bg: mode("#eee", "darkPrimary")(props),
-    },
+    ,td.rdtMonth:hover, td.rdtYear:hover,.rdtSwitch:hover":
+      {
+        bg: mode("#eee", "darkPrimary")(props),
+      },
     ".rdtPicker td.rdtDisabled:hover": {
       bg: "none",
     },

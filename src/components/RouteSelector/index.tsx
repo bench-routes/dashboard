@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { VStack } from "@chakra-ui/react";
+import { Alert, AlertIcon, CircularProgress, VStack } from "@chakra-ui/react";
 import { useGlobalStore } from "../../store/global";
 import useFetch from "../../utils/useFetch";
 import { getRoutes } from "../../services/getRoutes";
@@ -21,15 +21,37 @@ const RouteSelector: React.FC = () => {
   const handleFilteredRoutesChange = (routes: routeResponse[]) => {
     changeFilteredRoutes([...routes]);
   };
+  if (error) {
+    return (
+      <VStack data-testid="route-selector" mt={4} w="100%" h="100%">
+        <Search
+          routes={routes}
+          isDisabled={error !== undefined || status != "fetched"}
+          changeFilteredRoutes={handleFilteredRoutesChange}
+        />
+        <Alert data-testid="error-message" fontSize="xs" status="error">
+          <AlertIcon />
+          {error}
+        </Alert>
+      </VStack>
+    );
+  }
+
+  if (status === "fetching" || status === "init")
+    return (
+      <VStack w="95%" h="100%" margin="auto" justifyContent="center">
+        <CircularProgress size="5vh" isIndeterminate />
+      </VStack>
+    );
 
   return (
     <VStack data-testid="route-selector" mt={4} w="100%" h="100%">
       <Search
         routes={routes}
-        isDisabled={error !== undefined || status != "fetched"}
         changeFilteredRoutes={handleFilteredRoutesChange}
+        isDisabled={false}
       />
-      <RouteList error={error} routes={filteredRoutes} />
+      <RouteList routes={filteredRoutes} />
     </VStack>
   );
 };

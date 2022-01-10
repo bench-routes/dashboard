@@ -12,11 +12,8 @@ import { queryEntities } from "../../services/queryEntity";
 import constants from "../../utils/constants";
 import { useGlobalStore } from "../../store/global";
 
-const {
-  defaultStartTimestamp,
-  defaultStepValue,
-  defaultEndTimestamp,
-} = constants;
+const { defaultStartTimestamp, defaultStepValue, defaultEndTimestamp } =
+  constants;
 
 const TestComponent = () => {
   const { changeRoute } = useGlobalStore();

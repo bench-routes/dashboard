@@ -20,11 +20,8 @@ interface PageProps {
 
 const GraphWrapper: React.FC<PageProps> = (props: PageProps) => {
   const { selectedRoutePath } = props;
-  const {
-    selectedStartTimestamp,
-    selectedEndTimestamp,
-    selectedStepValue,
-  } = useTimeQuerierStore();
+  const { selectedStartTimestamp, selectedEndTimestamp, selectedStepValue } =
+    useTimeQuerierStore();
 
   const { data, error, status } = useFetch<apiResponse<queryResponse>>(
     queryEntities(

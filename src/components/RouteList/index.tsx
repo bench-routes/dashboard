@@ -1,15 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { FixedSizeList as List } from "react-window";
-import {
-  useStyleConfig,
-  Box,
-  Flex,
-  Text,
-  Tooltip,
-  Alert,
-  AlertIcon,
-} from "@chakra-ui/react";
+import { useStyleConfig, Box, Flex, Text, Tooltip } from "@chakra-ui/react";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { routeListProps } from "../../utils/types";
 import { ArrowUpIcon, ArrowDownIcon } from "@chakra-ui/icons";
@@ -21,10 +13,7 @@ interface rowParameters {
   style: React.CSSProperties | undefined;
 }
 
-const RouteList: React.FC<routeListProps> = ({
-  routes,
-  error,
-}: routeListProps) => {
+const RouteList: React.FC<routeListProps> = ({ routes }: routeListProps) => {
   const styles = useStyleConfig("ReactWindow", {});
   const { selectedRoutePath, changeRoute } = useGlobalStore();
   const Row = ({ index, style }: rowParameters) => {
@@ -50,13 +39,6 @@ const RouteList: React.FC<routeListProps> = ({
     );
   };
 
-  if (error)
-    return (
-      <Alert data-testid="error-message" fontSize="xs" status="error">
-        <AlertIcon />
-        {error}
-      </Alert>
-    );
   return (
     <Box sx={styles} data-testid="route-list">
       <AutoSizer>
@@ -80,7 +62,6 @@ const RouteList: React.FC<routeListProps> = ({
 // For some reason prop-types was throwing error without this
 RouteList.propTypes = {
   routes: PropTypes.array.isRequired,
-  error: PropTypes.string,
 };
 
 export default RouteList;
