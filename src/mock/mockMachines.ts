@@ -1,8 +1,8 @@
-import communityFaker from "community-faker";
+import faker from "@faker-js/faker";
 
 //Generator Function
 const createMachines = (numUsers = 5) => {
-  return Array.from({ length: numUsers }, communityFaker.internet.domainName);
+  return Array.from({ length: numUsers }, faker.internet.domainName);
 };
 
 // Mock data

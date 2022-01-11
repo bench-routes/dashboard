@@ -1,13 +1,13 @@
-import communityFaker from "community-faker";
+import faker from "@faker-js/faker";
 
 /* Custom Generator
    Generate a route with the given keys
    with random values using community-faker
 */
 const routeGenerator = () => ({
-  chain_name: communityFaker.unique(communityFaker.system.filePath),
-  entity_name: communityFaker.unique(communityFaker.internet.url),
-  status: communityFaker.random.arrayElement(["true", "false", "none"]),
+  chain_name: faker.unique(faker.system.filePath),
+  entity_name: faker.unique(faker.internet.url),
+  status: faker.random.arrayElement(["true", "false", "none"]),
 });
 
 /* Generator Function
@@ -23,4 +23,4 @@ export const mockRoutes = (num: number) => {
 };
 
 // Mock search input
-export const mockSearch = communityFaker.datatype.string();
+export const mockSearch = faker.datatype.string();
