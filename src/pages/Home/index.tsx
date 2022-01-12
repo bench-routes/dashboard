@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Flex, GridItem, useColorModeValue } from "@chakra-ui/react";
+import { Grid, GridItem, useColorModeValue } from "@chakra-ui/react";
 import Sidebar from "../../components/Sidebar";
 import RouteVisualiser from "../../components/RouteVisualiser";
 
