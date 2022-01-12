@@ -16,7 +16,7 @@ const Home: React.FC = () => {
       <GridItem bg={value} colSpan={5} height="100%">
         <Sidebar />
       </GridItem>
-      <GridItem colSpan={19} flex="1">
+      <GridItem colSpan={19}>
         <RouteVisualiser />
       </GridItem>
     </Grid>
