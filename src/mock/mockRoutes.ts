@@ -2,7 +2,7 @@ import faker from "@faker-js/faker";
 
 /* Custom Generator
    Generate a route with the given keys
-   with random values using community-faker
+   with random values using faker
 */
 const routeGenerator = () => ({
   chain_name: faker.unique(faker.system.filePath),

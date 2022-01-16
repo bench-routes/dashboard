@@ -3,7 +3,7 @@ import moment from "moment";
 
 /* Custom Generator
    Generate a datapoint with the given keys
-   with random values using community-faker
+   with random values using faker
 */
 const dataGenerator = () => ({
   timestamp: moment(faker.date.past()).unix(),
