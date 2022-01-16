@@ -74,7 +74,7 @@ const useFetch = <T = unknown>(
           if (cancelRequest.current) return;
 
           dispatch({ type: "success", payload: response.data });
-        } catch (error: any) {
+        } catch (error) {
           // Let's keep error handling to another day,
           // hence the type for error is "any" here.
           if (cancelRequest.current) return;
