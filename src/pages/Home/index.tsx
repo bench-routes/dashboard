@@ -8,10 +8,10 @@ const Home: React.FC = () => {
 
   return (
     <Flex h="100vh" alignContent="center" alignItems="center">
-      <Box bg={value} height="100vh">
+      <Box bg={value} height="100%">
         <Sidebar />
       </Box>
-      <Box width="80%">
+      <Box width="80%" height="100%">
         <RouteVisualiser />
       </Box>
     </Flex>
