@@ -1,4 +1,4 @@
-import faker from "faker";
+import faker from "@faker-js/faker";
 
 //Generator Function
 const createMachines = (numUsers = 5) => {

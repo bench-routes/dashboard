@@ -1,4 +1,4 @@
-import faker from "faker";
+import faker from "@faker-js/faker";
 
 /* Custom Generator
    Generate a route with the given keys
