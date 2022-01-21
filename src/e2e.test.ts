@@ -1,6 +1,6 @@
 import { routeResponse } from "./utils/types";
 import puppeteer from "puppeteer";
-import moment from "moment";
+import dayjs from "dayjs";
 import constants from "./utils/constants";
 import { getActiveMachines } from "./services/getActiveMachines";
 import { getRoutes } from "./services/getRoutes";
@@ -50,12 +50,12 @@ describe("E2E test for Dashboard", () => {
     );
     const graph = page.$('[data-testid="graph-info"]');
     const startTime = await page.$(
-      `input[class="custom-datepicker start-time"][value="${moment(
+      `input[class="custom-datepicker start-time"][value="${dayjs(
         defaultStartTimestamp
       ).format(`${dateFormat} ${timeFormat}"`)}]`
     );
     const endTime = await page.$(
-      `input[value="${moment(defaultEndTimestamp).format(
+      `input[value="${dayjs(defaultEndTimestamp).format(
         `${dateFormat} ${timeFormat}"`
       )}]`
     );
@@ -165,7 +165,7 @@ describe("E2E test for Dashboard", () => {
 
     await page.goto("http://localhost:5000");
     const startTime = await page.$(".start-time");
-    const newStart = moment().subtract(1, "days").subtract(1, "hours");
+    const newStart = dayjs().subtract(1, "days").subtract(1, "hours");
     if (startTime) {
       await startTime.click();
     }
@@ -176,7 +176,7 @@ describe("E2E test for Dashboard", () => {
     );
     await nextStart?.evaluate((b) => b.click());
     const start = await page.$(
-      `input[class="custom-datepicker start-time"][value="${moment(
+      `input[class="custom-datepicker start-time"][value="${dayjs(
         newStart
       ).format(`${dateFormat} ${timeFormat}`)}"]`
     );
@@ -189,7 +189,7 @@ describe("E2E test for Dashboard", () => {
 
     await page.goto("http://localhost:5000");
     const endTime = await page.$(".end-time");
-    const newEnd = moment().subtract(2, "days");
+    const newEnd = dayjs().subtract(2, "days");
     if (endTime) {
       await endTime.click();
     }
@@ -202,7 +202,7 @@ describe("E2E test for Dashboard", () => {
       return b.click();
     });
     const end = await page.$(
-      `input[class="custom-datepicker end-time"][value="${moment(newEnd).format(
+      `input[class="custom-datepicker end-time"][value="${dayjs(newEnd).format(
         `${dateFormat} ${timeFormat}"`
       )}]`
     );
@@ -226,7 +226,7 @@ describe("E2E test for Dashboard", () => {
 
     await page.goto("http://localhost:5000");
     const endTime = await page.$(".end-time");
-    const newEnd = moment().subtract(2, "days");
+    const newEnd = dayjs().subtract(2, "days");
     if (endTime) {
       await endTime.click();
     }
@@ -252,7 +252,7 @@ describe("E2E test for Dashboard", () => {
     await entities[0].click();
     if (await page.$('[data-testid="graph"]')) {
       const startTime = await page.$(".start-time");
-      const newStart = moment().subtract(1, "days").subtract(1, "hours");
+      const newStart = dayjs().subtract(1, "days").subtract(1, "hours");
       if (startTime) {
         await startTime.click();
       }

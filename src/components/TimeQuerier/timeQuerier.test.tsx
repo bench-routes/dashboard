@@ -1,5 +1,5 @@
 import * as React from "react";
-import moment from "moment";
+import dayjs from "dayjs";
 import { fireEvent } from "@testing-library/react";
 import TimeQuerier from "./";
 import { render } from "../../utils/customRender";
@@ -21,12 +21,12 @@ describe("TimeQuerier Component", () => {
     expect(getByDisplayValue(defaultStepValue.toString(10))).toBeTruthy();
     expect(
       getByDisplayValue(
-        moment(defaultStartTimestamp).format(`${dateFormat} ${timeFormat}`)
+        dayjs(defaultStartTimestamp).format(`${dateFormat} ${timeFormat}`)
       )
     ).toBeTruthy();
     expect(
       getByDisplayValue(
-        moment(defaultEndTimestamp).format(`${dateFormat} ${timeFormat}`)
+        dayjs(defaultEndTimestamp).format(`${dateFormat} ${timeFormat}`)
       )
     ).toBeTruthy();
   });
