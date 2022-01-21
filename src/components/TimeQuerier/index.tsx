@@ -13,10 +13,14 @@ import {
   Alert,
   AlertIcon,
 } from "@chakra-ui/react";
-import Datetime from "react-datetime";
 import constants from "../../utils/constants";
 import { useTimeQuerierStore } from "../../store/timeQuerier";
 import dayjs from "dayjs";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
 
 const TimeQuerier: React.FC = () => {
   const styles = useStyleConfig("DateTime", {});
@@ -77,14 +81,21 @@ const TimeQuerier: React.FC = () => {
       >
         <Text>Start Time</Text>
         <Box sx={styles}>
-          <Datetime
-            value={startTime}
-            dateFormat={dateFormat}
-            timeFormat={timeFormat}
-            inputProps={{ className: "custom-datepicker start-time" }}
-            onChange={handleStartChange}
-            isValidDate={valid}
-          />
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              disableToolbar
+              variant="inline"
+              format="MM/dd/yyyy"
+              margin="normal"
+              id="date-picker-inline"
+              value={startTime}
+              isValidDate={valid}
+              onChange={handleStartChange}
+              KeyboardButtonProps={{
+                "aria-label": "change date",
+              }}
+            />
+          </MuiPickersUtilsProvider>
         </Box>
       </Box>
       <Box
@@ -96,14 +107,21 @@ const TimeQuerier: React.FC = () => {
       >
         <Text>End Time</Text>
         <Box sx={styles}>
-          <Datetime
-            value={endTime}
-            dateFormat={dateFormat}
-            timeFormat={timeFormat}
-            inputProps={{ className: "custom-datepicker end-time" }}
-            onChange={handleEndChange}
-            isValidDate={valid}
-          />
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              disableToolbar
+              variant="inline"
+              format="MM/dd/yyyy"
+              margin="normal"
+              id="date-picker-inline"
+              value={endTime}
+              isValidDate={valid}
+              onChange={handleEndChange}
+              KeyboardButtonProps={{
+                "aria-label": "change date",
+              }}
+            />
+          </MuiPickersUtilsProvider>
         </Box>
       </Box>
       <Box
