@@ -8,11 +8,8 @@ import { getRoutes } from "../../services/getRoutes";
 import { truncate } from "../../utils/stringManipulation";
 
 jest.mock("axios");
-jest.mock(
-  "react-virtualized-auto-sizer",
-  () =>
-    ({ children }: any) =>
-      children({ height: 600, width: 600 })
+jest.mock("react-virtualized-auto-sizer", () => ({ children }: any) =>
+  children({ height: 600, width: 600 })
 );
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;
