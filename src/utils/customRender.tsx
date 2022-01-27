@@ -1,6 +1,8 @@
 import * as React from "react";
 import { render, RenderOptions } from "@testing-library/react";
 import { ChakraProvider } from "@chakra-ui/react";
+import { QueryClient, QueryClientProvider } from "react-query";
+
 import theme from "../theme";
 
 /*  Function used to render the component that we need to test
@@ -9,8 +11,13 @@ import theme from "../theme";
     input : component that is tested
     output : component after being wrapped by all the providers
 */
+
+const queryClient = new QueryClient();
+
 const AllProviders = ({ children }: { children?: React.ReactNode }) => (
-  <ChakraProvider theme={theme}>{children}</ChakraProvider>
+  <QueryClientProvider client={queryClient}>
+    <ChakraProvider theme={theme}>{children}</ChakraProvider>
+  </QueryClientProvider>
 );
 
 const customRender = (ui: React.ReactElement, options?: RenderOptions) =>

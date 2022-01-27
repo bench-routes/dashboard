@@ -26,7 +26,10 @@ const GraphWrapper: React.FC<PageProps> = (props: PageProps) => {
     selectedStepValue,
   } = useTimeQuerierStore();
 
-  const { data, error, status } = useFetch<apiResponse<queryResponse>>(
+  const { data, error, isLoading, isFetching, isError } = useFetch<
+    apiResponse<queryResponse>
+  >(
+    "graph",
     queryEntities(
       selectedRoutePath,
       selectedStartTimestamp,
@@ -35,7 +38,7 @@ const GraphWrapper: React.FC<PageProps> = (props: PageProps) => {
     )
   );
 
-  if (error) {
+  if (isError) {
     return (
       <VStack w="95%" h="100%" margin="auto" justifyContent="center">
         <Alert
@@ -50,7 +53,7 @@ const GraphWrapper: React.FC<PageProps> = (props: PageProps) => {
         >
           <AlertIcon boxSize="40px" mr={0} />
           <AlertTitle mt={4} mb={1} fontSize="lg">
-            {error}
+            {error?.response?.data}
           </AlertTitle>
           <AlertDescription maxWidth="sm">
             An unexpected error occurred while processing the graph.
@@ -60,7 +63,7 @@ const GraphWrapper: React.FC<PageProps> = (props: PageProps) => {
     );
   }
 
-  if (status === "fetching" || status === "init")
+  if (isLoading || isFetching)
     return (
       <VStack w="95%" h="100%" margin="auto" justifyContent="center">
         <CircularProgress size="10vh" isIndeterminate />
@@ -93,7 +96,7 @@ const GraphWrapper: React.FC<PageProps> = (props: PageProps) => {
   return (
     <VStack w="95%" h="100%" margin="auto" justifyContent="center">
       <Box data-testid="graph" width="100%" height="90vh">
-        <ReusableGraph graphData={data.data} />
+        <ReusableGraph graphData={data.data.data} />
       </Box>
     </VStack>
   );

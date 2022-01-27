@@ -13,36 +13,38 @@ import { apiResponse, machineResponse } from "../../utils/types";
 
 const MachineSelector: React.FC = () => {
   const { selectedMachine, changeSelectedMachine } = useGlobalStore();
-  const { data, error, status } = useFetch<apiResponse<machineResponse>>(
-    getActiveMachines()
-  );
-  const machines = data ? data.data.machines : [];
+  const { data, error, isFetching, isLoading, isError, isFetched } = useFetch<
+    apiResponse<machineResponse>
+  >("machines", getActiveMachines());
+
+  const machines = data ? data.data.data.machines : [];
 
   useEffect(() => {
     if (machines.length) changeSelectedMachine(machines[0]);
   }, [data]);
 
-  if (error) {
+  if (isError) {
     return (
       <Alert data-testid="error-message" fontSize="xs" status="error">
         <AlertIcon />
-        {error}
+        {error?.response?.data}
       </Alert>
     );
   }
 
-  if (status === "fetching" || status === "init") {
+  if (isFetching || isLoading) {
     return (
       <VStack w="95%" h="100%" margin="auto" justifyContent="center">
         <CircularProgress size="5vh" isIndeterminate />
       </VStack>
     );
   }
+
   return (
     <VStack w="100%">
       <Select
         mt={3}
-        isDisabled={status != "fetched" || error !== undefined}
+        isDisabled={!isFetched || isError}
         value={selectedMachine ? selectedMachine : "Fetching Machines"}
         data-testid="machine-selector"
         onChange={(e) => {
