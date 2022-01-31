@@ -9,10 +9,11 @@ import { apiResponse, routeResponse } from "../../utils/types";
 
 const RouteSelector: React.FC = () => {
   const { selectedMachine } = useGlobalStore();
-  const { data, error, status } = useFetch<apiResponse<routeResponse[]>>(
-    getRoutes(selectedMachine ? selectedMachine : "")
-  );
-  const routes = data ? data.data : [];
+  const { data, error, isLoading, isFetching, isError, isFetched } = useFetch<
+    apiResponse<routeResponse[]>
+  >("routes", getRoutes(selectedMachine ? selectedMachine : ""));
+
+  const routes = data ? data.data.data : [];
   const [filteredRoutes, changeFilteredRoutes] = useState<routeResponse[]>([]);
 
   useEffect(() => {
@@ -21,23 +22,24 @@ const RouteSelector: React.FC = () => {
   const handleFilteredRoutesChange = (routes: routeResponse[]) => {
     changeFilteredRoutes([...routes]);
   };
-  if (error) {
+
+  if (isError) {
     return (
       <VStack data-testid="route-selector" mt={4} w="100%" h="100%">
         <Search
           routes={routes}
-          isDisabled={error !== undefined || status != "fetched"}
+          isDisabled={isError || !isFetched}
           changeFilteredRoutes={handleFilteredRoutesChange}
         />
         <Alert data-testid="error-message" fontSize="xs" status="error">
           <AlertIcon />
-          {error}
+          {error?.response?.data}
         </Alert>
       </VStack>
     );
   }
 
-  if (status === "fetching" || status === "init")
+  if (isFetching || isLoading)
     return (
       <VStack w="95%" h="100%" margin="auto" justifyContent="center">
         <CircularProgress size="5vh" isIndeterminate />
