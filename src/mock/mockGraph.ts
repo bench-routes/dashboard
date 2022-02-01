@@ -1,12 +1,12 @@
 import faker from "@faker-js/faker";
-import moment from "moment";
+import dayjs from "dayjs";
 
 /* Custom Generator
    Generate a datapoint with the given keys
    with random values using faker
 */
 const dataGenerator = () => ({
-  timestamp: moment(faker.date.past()).unix(),
+  timestamp: dayjs(faker.date.past()).unix(),
   value: faker.datatype.number,
 });
 

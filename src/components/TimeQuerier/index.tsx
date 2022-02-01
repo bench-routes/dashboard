@@ -13,28 +13,35 @@ import {
   Alert,
   AlertIcon,
 } from "@chakra-ui/react";
-import moment from "moment";
-import Datetime from "react-datetime";
 import constants from "../../utils/constants";
 import { useTimeQuerierStore } from "../../store/timeQuerier";
+import dayjs from "dayjs";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
 
 const TimeQuerier: React.FC = () => {
   const styles = useStyleConfig("DateTime", {});
-  const { selectedStartTimestamp, selectedEndTimestamp, changeTimeQuerier } =
-    useTimeQuerierStore();
+  const {
+    selectedStartTimestamp,
+    selectedEndTimestamp,
+    changeTimeQuerier,
+  } = useTimeQuerierStore();
   const { defaultStepValue, minStepValue, dateFormat, timeFormat } = constants;
-  const [startTime, setStartTime] = useState(moment(selectedStartTimestamp));
-  const [endTime, setEndTime] = useState(moment(selectedEndTimestamp));
+  const [startTime, setStartTime] = useState(dayjs(selectedStartTimestamp));
+  const [endTime, setEndTime] = useState(dayjs(selectedEndTimestamp));
   const [stepTime, setStepTime] = useState(defaultStepValue);
   const [error, setError] = useState<undefined | string>(undefined);
 
-  const handleStartChange = (date: moment.Moment | string) => {
+  const handleStartChange = (date: dayjs.Dayjs | string) => {
     if (typeof date !== "string") {
       setStartTime(date);
       setError(undefined);
     }
   };
-  const handleEndChange = (date: moment.Moment | string) => {
+  const handleEndChange = (date: dayjs.Dayjs | string) => {
     if (typeof date !== "string") {
       setEndTime(date);
       setError(undefined);
@@ -44,13 +51,13 @@ const TimeQuerier: React.FC = () => {
     if (valueAsString !== "" && valueAsNumber >= minStepValue)
       setStepTime(valueAsNumber);
   };
-  const valid = (current: moment.Moment) => {
-    return current.isBefore(moment());
+  const valid = (current: dayjs.Dayjs) => {
+    return current.isBefore(dayjs());
   };
   const handleFetchTimeSeriesData = () => {
     if (
       endTime.isBefore(startTime) ||
-      endTime.isAfter(moment()) ||
+      endTime.isAfter(dayjs()) ||
       stepTime < minStepValue
     )
       setError("Kindy check your input");
@@ -74,14 +81,21 @@ const TimeQuerier: React.FC = () => {
       >
         <Text>Start Time</Text>
         <Box sx={styles}>
-          <Datetime
-            value={startTime}
-            dateFormat={dateFormat}
-            timeFormat={timeFormat}
-            inputProps={{ className: "custom-datepicker start-time" }}
-            onChange={handleStartChange}
-            isValidDate={valid}
-          />
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              disableToolbar
+              variant="inline"
+              format="MM/dd/yyyy"
+              margin="normal"
+              id="date-picker-inline"
+              value={startTime}
+              isValidDate={valid}
+              onChange={handleStartChange}
+              KeyboardButtonProps={{
+                "aria-label": "change date",
+              }}
+            />
+          </MuiPickersUtilsProvider>
         </Box>
       </Box>
       <Box
@@ -93,14 +107,21 @@ const TimeQuerier: React.FC = () => {
       >
         <Text>End Time</Text>
         <Box sx={styles}>
-          <Datetime
-            value={endTime}
-            dateFormat={dateFormat}
-            timeFormat={timeFormat}
-            inputProps={{ className: "custom-datepicker end-time" }}
-            onChange={handleEndChange}
-            isValidDate={valid}
-          />
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              disableToolbar
+              variant="inline"
+              format="MM/dd/yyyy"
+              margin="normal"
+              id="date-picker-inline"
+              value={endTime}
+              isValidDate={valid}
+              onChange={handleEndChange}
+              KeyboardButtonProps={{
+                "aria-label": "change date",
+              }}
+            />
+          </MuiPickersUtilsProvider>
         </Box>
       </Box>
       <Box
