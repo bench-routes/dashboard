@@ -44,8 +44,11 @@ const TimeQuerier: React.FC = () => {
     if (valueAsString !== "" && valueAsNumber >= minStepValue)
       setStepTime(valueAsNumber);
   };
-  const valid = (current: moment.Moment) => {
-    return current.isBefore(moment());
+  const validStartTime = (current: moment.Moment) => {
+    return current.isAfter(moment());
+  };
+  const validEndTime = (current: moment.Moment) => {
+    return current.isAfter(startTime);
   };
   const handleFetchTimeSeriesData = () => {
     if (
@@ -80,7 +83,7 @@ const TimeQuerier: React.FC = () => {
             timeFormat={timeFormat}
             inputProps={{ className: "custom-datepicker start-time" }}
             onChange={handleStartChange}
-            isValidDate={valid}
+            isValidDate={validStartTime}
           />
         </Box>
       </Box>
@@ -99,7 +102,7 @@ const TimeQuerier: React.FC = () => {
             timeFormat={timeFormat}
             inputProps={{ className: "custom-datepicker end-time" }}
             onChange={handleEndChange}
-            isValidDate={valid}
+            isValidDate={validEndTime}
           />
         </Box>
       </Box>
